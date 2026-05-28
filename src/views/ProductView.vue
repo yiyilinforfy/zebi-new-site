@@ -44,6 +44,18 @@ function onCategoryTabClick(event, targetId) {
   window.scrollTo({ top, behavior: 'smooth' })
 }
 
+function onQuickJumpClick(event, targetId) {
+  event.preventDefault()
+  const section = document.getElementById(targetId)
+  if (!section) return
+
+  const headerHeight = document.querySelector('header')?.getBoundingClientRect().height || 0
+  const quickJumpHeight =
+    document.querySelector('.platform-quick-jump')?.getBoundingClientRect().height || 0
+  const top = window.scrollY + section.getBoundingClientRect().top - headerHeight - quickJumpHeight - 16
+  window.scrollTo({ top, behavior: 'smooth' })
+}
+
 function updateActiveCategoryTab() {
   const tabs = document.querySelectorAll('.platform-category-tab')
   if (!tabs.length) return
@@ -148,11 +160,11 @@ onUnmounted(() => {
 <section class="platform-quick-jump">
   <div class="wrap">
     <div class="platform-quick-jump-links">
-      <a href="#thesis"><span class="jump-num">01</span><span>Thesis</span></a>
-      <a href="#architecture"><span class="jump-num">02</span><span>Architecture</span></a>
-      <a href="#unit-cell"><span class="jump-num">03</span><span>Unit Cell</span></a>
-      <a href="#modules"><span class="jump-num">04</span><span>Modules</span></a>
-      <a href="#landscape"><span class="jump-num">05</span><span>Landscape</span></a>
+      <a href="#thesis" @click="onQuickJumpClick($event, 'thesis')"><span class="jump-num">01</span><span>Thesis</span></a>
+      <a href="#architecture" @click="onQuickJumpClick($event, 'architecture')"><span class="jump-num">02</span><span>Architecture</span></a>
+      <a href="#unit-cell" @click="onQuickJumpClick($event, 'unit-cell')"><span class="jump-num">03</span><span>Unit Cell</span></a>
+      <a href="#modules" @click="onQuickJumpClick($event, 'modules')"><span class="jump-num">04</span><span>Modules</span></a>
+      <a href="#landscape" @click="onQuickJumpClick($event, 'landscape')"><span class="jump-num">05</span><span>Landscape</span></a>
     </div>
   </div>
 </section>

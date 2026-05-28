@@ -66,7 +66,7 @@ const spaceUsers = [
 ]
 
 onMounted(() => {
-  fetch('https://cdn.jsdelivr.net/gh/yiyilinforfy/zebi-site@main/public/news.json')
+  fetch(`${import.meta.env.BASE_URL}news.json`)
     .then((response) => response.json())
     .then((data) => {
       if (!Array.isArray(data?.news) || data.news.length === 0) return
