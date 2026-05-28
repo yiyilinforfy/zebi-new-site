@@ -1,0 +1,323 @@
+/**
+ * Mobile-only layout fixes (max-width only — desktop unchanged).
+ */
+
+@media (max-width: 1024px) {
+  header.site-nav .nav-links {
+    display: none !important;
+  }
+
+  header.site-nav .nav-menu-btn {
+    display: inline-flex !important;
+  }
+
+  html,
+  body,
+  #app {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: #07090e;
+  }
+
+  main {
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body.site-nav-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  main,
+  footer {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    box-sizing: border-box;
+  }
+
+  .hero-grid > * {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .nasa-stream-section {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: calc(var(--site-nav-height, 64px) + 8px);
+    padding-bottom: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  /* 去掉左右透明羽化 mask，防止露出白底闪条 */
+  .nasa-roll-mask {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  .nasa-roll-wrap,
+  .nasa-roll-track {
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  .hero-visual,
+  .orbit-vis {
+    overflow: hidden;
+    contain: layout paint;
+  }
+
+  .orbit-ring-1 {
+    width: 240px;
+    height: 240px;
+  }
+
+  .orbit-ring-2 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .orbit-ring-3 {
+    width: 360px;
+    height: 360px;
+  }
+
+  @keyframes orbit1-mobile {
+    from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+  }
+
+  @keyframes orbit2-mobile {
+    from { transform: rotate(90deg) translateX(130px) rotate(-90deg); }
+    to { transform: rotate(450deg) translateX(130px) rotate(-450deg); }
+  }
+
+  @keyframes orbit3-mobile {
+    from { transform: rotate(180deg) translateX(160px) rotate(-180deg); }
+    to { transform: rotate(540deg) translateX(160px) rotate(-180deg); }
+  }
+
+  .sat-1 { animation-name: orbit1-mobile; }
+  .sat-2 { animation-name: orbit2-mobile; }
+  .sat-3 { animation-name: orbit3-mobile; }
+
+  section {
+    overflow-x: hidden;
+  }
+
+  /* Product：图表与脉冲框不撑出横向滚动 */
+  .chart-container {
+    overflow: hidden;
+    background: var(--bg);
+  }
+
+  .chart-container canvas {
+    background: transparent !important;
+  }
+
+  .moe-router-box::before {
+    display: none;
+  }
+
+  body::before {
+    opacity: 0.06;
+  }
+
+  .hero-below-ticker {
+    padding-top: 40px;
+  }
+
+  .hero-actions,
+  .cta-actions {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-ghost,
+  .cta-actions .btn-primary {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .panel-grid,
+  .control-panel,
+  .viz-panel {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .footer-grid {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrap {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+
+  header.site-nav {
+    padding: 10px 0;
+  }
+
+  .brand-logo {
+    height: 36px;
+    width: auto;
+  }
+
+  .brand-title {
+    font-size: 17px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 100px 0 48px;
+  }
+
+  .hero-visual {
+    height: min(56vw, 300px);
+    width: 100%;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .hero-actions .btn-primary {
+    justify-content: center;
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+
+  .hero-actions .btn-primary:hover {
+    transform: none;
+  }
+
+  .cta-section {
+    padding: 64px 0;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(28px, 8vw, 44px);
+  }
+
+  .cta-section p {
+    font-size: 16px;
+    margin-bottom: 32px;
+    max-width: none;
+  }
+
+  .cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .cta-actions .btn-primary {
+    justify-content: center;
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+
+  .cta-actions .btn-primary:hover {
+    transform: none;
+  }
+
+  section {
+    padding: 72px 0;
+  }
+
+  .platform-hero {
+    padding: 96px 0 40px;
+  }
+
+  .platform-hero h1 {
+    font-size: clamp(30px, 8.5vw, 42px);
+  }
+
+  section.module {
+    padding: 48px 0;
+  }
+
+  .module-title {
+    font-size: clamp(26px, 7vw, 34px);
+  }
+
+  .wizard-steps {
+    flex-direction: column;
+  }
+
+  .compet-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chart-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  footer {
+    padding: 48px 0 24px;
+  }
+
+  .footer-grid {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .platform-hero .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .system-status-tags {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .status-tag {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-actions .btn-primary:hover,
+  .cta-actions .btn-primary:hover {
+    transform: none;
+  }
+}

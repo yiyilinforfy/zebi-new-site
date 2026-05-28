@@ -16,31 +16,22 @@ import '@/assets/heliomind-brand.css'
             </span>
           </RouterLink>
           <p>
-            The design, simulation, and optimization platform for AI infrastructure in the solar age. From Earth data centers to orbital compute networks.
+            Zebi Lab builds HelioMind OS — the design platform for AI infrastructure in the space. From Earth data centers to orbital compute networks.
           </p>
         </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Navigate</div>
+        <div class="footer-col footer-col-pages">
+          <div class="footer-col-title">Pages</div>
           <ul>
             <li><RouterLink to="/">Home</RouterLink></li>
             <li><RouterLink to="/product">Product</RouterLink></li>
+            <li><RouterLink to="/plan">Plan</RouterLink></li>
             <li><RouterLink to="/mission">Mission</RouterLink></li>
             <li><RouterLink to="/join-us">Join Us</RouterLink></li>
           </ul>
         </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Product</div>
-          <ul>
-            <li><a href="/product#tco">Economic Engine</a></li>
-            <li><a href="/product#thermal">Thermal Twin</a></li>
-            <li><a href="/product#moe">Orbital MoE</a></li>
-            <li><a href="/product#sorter">Workload Sorter</a></li>
-          </ul>
-        </div>
       </div>
       <div class="footer-bottom">
-        <div>© 2026 ZEBI LAB · AI infrastructure in the solar age</div>
-        <!-- <div>v0.2 · all numbers illustrative · not for distribution</div> -->
+        <div>© 2026 ZEBI LAB</div>
       </div>
     </div>
   </footer>

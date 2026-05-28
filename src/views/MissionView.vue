@@ -1,10 +1,16 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
 import SiteHeader from '@/components/SiteHeader.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
 import '@/assets/heliomind-home.css'
 import '@/assets/heliomind-brand.css'
 import missionImage from '@/assets/images/mission.jpg'
+
+const router = useRouter()
+
+function goTo(path) {
+  router.push(path)
+}
 </script>
 
 <template>
@@ -19,15 +25,15 @@ import missionImage from '@/assets/images/mission.jpg'
       <div class="wrap">
         <div class="mission-hero-inner">
           <h1 class="mission-title">
-            We build the design layer for AI infrastructure in the solar age.
+            We're building the design platform for AI infrastructure in space.
           </h1>
           <p class="mission-subtitle">
             The largest capital buildout in human history — from Earth data centers to orbital compute
             networks — is happening without a real design platform.<br>
             Zebi Lab exists to build that platform.
           </p>
-          <RouterLink class="btn-primary mission-open-btn" to="/join-us">
-            <span>Join the mission</span>
+          <button type="button" class="btn-primary" @click="goTo('/join-us')">
+            <span>Join the text-transform</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path
                 d="M3 7H11M11 7L7 3M11 7L7 11"
@@ -37,7 +43,7 @@ import missionImage from '@/assets/images/mission.jpg'
                 stroke-linejoin="round"
               />
             </svg>
-          </RouterLink>
+          </button>
         </div>
       </div>
     </section>
@@ -46,9 +52,7 @@ import missionImage from '@/assets/images/mission.jpg'
       <div class="wrap narrow">
         <div class="section-eyebrow">The gap</div>
         <p class="mission-copy">
-          In the next decade, over $3 trillion will be spent on AI infrastructure. Hyperscalers, satellite
-          operators, and sovereign AI programs are making thousand-billion-dollar bets — with spreadsheets,
-          intuition, and vendor pitches.
+          In the next decade, over $3 trillion will be spent on AI infrastructure. Hyperscalers, satellite operators, and sovereign programs are making trillion-dollar bets — with spreadsheets, intuition, and vendor pitches.
         </p>
         <p class="mission-copy">
           No one has the tooling to design, simulate, and optimize this new class of infrastructure.
@@ -81,7 +85,7 @@ import missionImage from '@/assets/images/mission.jpg'
             </p>
           </article>
           <article class="thesis-card">
-            <h3>3. The platform wins, not the hardware.</h3>
+            <h3>3. The platform is the multiplier, not the hardware.</h3>
             <p>
               We don't need to own the satellites to design the system that designs the satellites. Zebi
               Lab builds the OS. Everyone else builds the hardware on top of it.
@@ -95,8 +99,7 @@ import missionImage from '@/assets/images/mission.jpg'
       <div class="wrap narrow">
         <div class="section-eyebrow">What we're building</div>
         <p class="mission-copy">
-          HelioMind OS — the design, simulation, and optimization platform for AI infrastructure in the
-          solar age.
+          HelioMind OS — the design, simulation, and optimization platform for AI infrastructure in space.
         </p>
         <p class="mission-copy">
           Eleven modules covering economics, thermal physics, constellation sizing, sparse-model topology,
@@ -107,15 +110,17 @@ import missionImage from '@/assets/images/mission.jpg'
           Used by AI labs, satellite operators, and sovereign programs to make billion-dollar decisions
           with confidence instead of faith.
         </p>
-        <RouterLink class="btn-ghost mission-open-ghost" to="/product">Explore HelioMind →</RouterLink>
+        <button type="button" class="btn-primary mission-product-btn" @click="goTo('/product')">
+          Explore HelioMind →
+        </button>
       </div>
     </section>
 
     <section class="mission-ask">
       <div class="wrap narrow">
         <h2 class="ask-title">
-          This is a century-scale problem.<br>
-          We're looking for century-scale people.
+          This is a once-in-a-generation problem.<br>
+          We're looking for a once-in-a-generation team.
         </h2>
         <p class="ask-copy">
           Zebi Lab is a small, focused team of engineers, physicists, and systems thinkers. We're building
@@ -124,7 +129,7 @@ import missionImage from '@/assets/images/mission.jpg'
         <p class="ask-copy">
           If that sounds like your kind of problem, we want to talk to you.
         </p>
-        <RouterLink class="btn-primary mission-open-btn" to="/join-us">
+        <button type="button" class="btn-primary" @click="goTo('/join-us')">
           <span>Join us</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path
@@ -135,7 +140,7 @@ import missionImage from '@/assets/images/mission.jpg'
               stroke-linejoin="round"
             />
           </svg>
-        </RouterLink>
+        </button>
       </div>
     </section>
   </main>
@@ -226,55 +231,8 @@ import missionImage from '@/assets/images/mission.jpg'
   line-height: 1.7;
 }
 
-.mission-open-btn {
-  font-family: var(--mono);
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 16px 32px;
-  background: var(--orange);
-  color: var(--bg);
-  border-radius: 100px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: none;
-  cursor: pointer;
-}
-
-.mission-open-btn:hover {
-  background: var(--orange-bright);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(255, 107, 61, 0.25);
-}
-
-.mission-open-btn svg {
-  transition: transform 0.2s;
-}
-
-.mission-open-btn:hover svg {
-  transform: translateX(4px);
-}
-
-.mission-open-ghost {
-  font-family: var(--mono);
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-2);
-  text-decoration: none;
-  transition: color 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.mission-product-btn {
   margin-top: 16px;
-}
-
-.mission-open-ghost:hover {
-  color: var(--text);
 }
 
 .mission-ask {
@@ -283,7 +241,7 @@ import missionImage from '@/assets/images/mission.jpg'
   background: radial-gradient(ellipse at center top, rgba(255, 107, 61, 0.1), transparent 70%);
 }
 
-.mission-ask .mission-open-btn {
+.mission-ask .btn-primary {
   margin: 0 auto;
 }
 
@@ -316,7 +274,70 @@ import missionImage from '@/assets/images/mission.jpg'
 
 @media (max-width: 768px) {
   .mission-hero {
-    padding-top: 150px;
+    min-height: auto;
+    padding: 120px 0 72px;
+    background-position: center 42%;
+  }
+
+  .mission-title {
+    font-size: clamp(32px, 8.5vw, 44px);
+  }
+
+  .mission-subtitle {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .mission-hero .btn-primary {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .mission-section {
+    padding: 72px 0;
+  }
+
+  .mission-copy {
+    font-size: 16px;
+  }
+
+  .thesis-card {
+    padding: 24px 20px;
+  }
+
+  .thesis-card h3 {
+    font-size: 24px;
+  }
+
+  .mission-product-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+
+  .mission-ask {
+    padding: 80px 0 88px;
+  }
+
+  .ask-title {
+    font-size: clamp(30px, 8vw, 40px);
+  }
+
+  .ask-copy {
+    font-size: 16px;
+  }
+
+  .mission-ask .btn-primary {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mission-hero {
+    padding-top: 108px;
   }
 }
 </style>

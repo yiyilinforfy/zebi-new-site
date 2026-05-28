@@ -1,3 +1,8 @@
+/* 避免移动端横向溢出时露出浏览器默认白底 */
+html {
+  background: #07090e;
+}
+
 /* Reset Vue scaffold styles so HelioMind pages render 1:1 with source HTML */
 #app {
   max-width: none;
@@ -8,7 +13,7 @@
 
 #app a {
   color: inherit;
-  padding: 0;
+  /* padding: 0; */
   transition: color 0.2s;
 }
 

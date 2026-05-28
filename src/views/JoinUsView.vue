@@ -90,14 +90,14 @@ const whyItems = [
       <div class="wrap grid-layout">
         <div class="join-hero-inner">
           <div class="section-eyebrow"><span class="mono-num">// 01</span> HUMAN CAPITAL PIPELINE</div>
-          <h1 class="hero-main-title">Build for the <br><em>solar age</em>.</h1>
+          <h1 class="hero-main-title">Join us. Build the platform for <em>AI in space</em>.</h1>
           <p class="join-subtitle">
             We are looking for builders, physicists, and systems engineers who refuse to work on comfortable, repetitive problems. Join us in engineering the software layer that powers autonomous intelligence in Earth orbit and beyond.
           </p>
-          <div class="system-status-tags">
+          <!-- <div class="system-status-tags">
             <span class="status-tag"><span class="pulse-dot"></span>Core Infrastructure Open</span>
             <span class="status-tag">Pre-Seed / Stealth</span>
-          </div>
+          </div> -->
         </div>
 
         <div class="proposal-console-wrapper">
@@ -154,13 +154,13 @@ const whyItems = [
                 </svg>
               </div>
               <div class="pointer-text">
-                <span class="highlight">Please attach your resume and portfolio before sending.</span>
-                <p>Your local mail client will initialize with your telemetry formatted. You may freely attach documents or links before transmitting.</p>
+                <span class="highlight">Hint · Before sending, please attach your resume and portfolio.</span>
+                <!-- <p>We strongly recommend adding attachments first, then sending the email from your local mail client.</p> -->
               </div>
             </div>
 
             <button type="submit" class="console-submit-btn">
-              <span>Transmit Application</span>
+              <span>Send Application</span>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" class="arrow-icon">
                 <path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
@@ -181,8 +181,7 @@ const whyItems = [
             <div class="trait-content">
               <h3>...see systems, not silos.</h3>
               <p>
-                You natively think across hardware, software, physics, and orbital economics. The boundary between
-                thermal dynamics and full-stack software architecture doesn't exist in your worldview.
+                You think across hardware, software, physics, and orbital economics. The boundary between "thermal engineer" and "systems architect" doesn't exist for you.
               </p>
             </div>
           </article>
@@ -192,8 +191,7 @@ const whyItems = [
             <div class="trait-content">
               <h3>...are comfortable with first principles.</h3>
               <p>
-                When there is no textbook, you fall back to pure physics. You derive, you simulate, you
-                validate. Extreme ambiguity accelerates your focus rather than paralyzing it.
+                When there's no textbook, you go back to the physics. You derive, you simulate, you validate. You're not afraid of the unfamiliar.
               </p>
             </div>
           </article>
@@ -212,44 +210,64 @@ const whyItems = [
       </div>
     </section>
 
-    <section class="join-section alt-bg">
+    <!-- <section class="join-section alt-bg">
       <div class="wrap narrow">
-        <button
-          type="button"
-          class="roles-toggle"
-          :aria-expanded="rolesOpen"
-          @click="rolesOpen = !rolesOpen"
-        >
-          <div class="roles-toggle-left">
-            <span class="section-eyebrow roles-eyebrow"><span class="mono-num">// 03</span> FUTURE TALENT POOL</span>
-            <span class="roles-main-text">Upcoming Active Capabilities</span>
-          </div>
-          <span class="roles-chevron" :class="{ open: rolesOpen }">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-        </button>
+        <div class="section-eyebrow"><span class="mono-num">// 03</span> ROADMAP</div>
+        <h2 class="section-title">Where we're going?</h2>
 
-        <Transition name="slide-fade">
-          <div v-show="rolesOpen" class="roles-panel">
-            <div class="role-tags">
-              <span v-for="role in roles" :key="role" class="role-tag">
-                <span class="tag-dot"></span>{{ role }}
-              </span>
+        <div class="roadmap-list">
+          <article class="roadmap-item">
+            <div class="roadmap-item-head">
+              <span class="roadmap-phase">Phase A</span>
+              <h3>Build the platform</h3>
+              <span class="roadmap-time">0-9 months</span>
             </div>
-            <p class="roles-hint">
-              [SYSTEM NOTE] Pipeline definitions are running simulation verifications. Secure your slot in our pipeline by submitting your telemetry above.
+            <p>
+              Ship HelioMind OS v1.0 with 11 modules. Sign first design contracts. First $1M
+              revenue.
             </p>
-          </div>
-        </Transition>
+          </article>
+
+          <article class="roadmap-item">
+            <div class="roadmap-item-head">
+              <span class="roadmap-phase">Phase B</span>
+              <h3>Land the anchor lab</h3>
+              <span class="roadmap-time">9-24 months</span>
+            </div>
+            <p>
+              Convert a frontier lab into a multi-year platform license. Scale to $15M ARR. File
+              core patents.
+            </p>
+          </article>
+
+          <article class="roadmap-item">
+            <div class="roadmap-item-head">
+              <span class="roadmap-phase">Phase C</span>
+              <h3>Become the standard</h3>
+              <span class="roadmap-time">24-48 months</span>
+            </div>
+            <p>
+              Referenced in every serious AI infrastructure design. 50+ enterprise customers.
+              $80-150M ARR.
+            </p>
+          </article>
+
+          <article class="roadmap-item">
+            <div class="roadmap-item-head">
+              <span class="roadmap-phase">Phase D</span>
+              <h3>Optional adjacencies</h3>
+              <span class="roadmap-time">48+ months</span>
+            </div>
+            <p>Public or strategic. Reference orbital cluster. Chip-design adjacency.</p>
+          </article>
+        </div>
       </div>
-    </section>
+    </section> -->
 
     <section class="join-section">
       <div class="wrap narrow">
-        <div class="section-eyebrow"><span class="mono-num">// 04</span> COGNITIVE ADVANTAGE</div>
-        <h2 class="section-title">Why Zebi Lab</h2>
+        <div class="section-eyebrow"><span class="mono-num">// 03</span> COGNITIVE ADVANTAGE</div>
+        <h2 class="section-title">Why Zebi Lab?</h2>
         <div class="why-grid">
           <article v-for="(item, idx) in whyItems" :key="item.title" class="why-card">
             <div class="why-card-glow"></div>
@@ -304,8 +322,10 @@ const whyItems = [
   color: var(--text-1);
   font-family: var(--font-sans);
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
   position: relative;
-  overflow: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -510,10 +530,11 @@ const whyItems = [
 .resume-attachment-pointer {
   display: flex;
   gap: 14px;
-  background: rgba(255, 107, 61, 0.02);
-  border: 1px dashed rgba(255, 107, 61, 0.2);
-  border-radius: 8px;
-  padding: 16px;
+  /* background: linear-gradient(180deg, rgba(255, 107, 61, 0.08), rgba(255, 107, 61, 0.03)); */
+  /* border: 1px solid rgba(255, 107, 61, 0.32); */
+  /* border-left: 3px solid var(--accent); */
+  /* border-radius: 8px; */
+  padding: 16px 0;
 }
 .pointer-icon {
   color: var(--accent);
@@ -522,14 +543,17 @@ const whyItems = [
   padding-top: 2px;
 }
 .pointer-text .highlight {
-  font-size: 13px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   font-weight: 500;
   color: var(--text-1);
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .pointer-text p {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.5;
   color: var(--text-2);
 }
@@ -616,6 +640,69 @@ const whyItems = [
   line-height: 1.65;
   color: var(--text-2);
   font-weight: 300;
+}
+
+/* ==========================================================================
+   Roadmap Section
+   ========================================================================== */
+.roadmap-list {
+  display: grid;
+  gap: 16px;
+}
+
+.roadmap-item {
+  background: linear-gradient(180deg, rgba(12, 16, 24, 0.86), rgba(7, 9, 14, 0.92));
+  border: 1px solid color-mix(in srgb, var(--border) 72%, var(--border-strong) 28%);
+  border-radius: 14px;
+  padding: 22px 24px;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.roadmap-item:hover {
+  border-color: rgba(255, 107, 61, 0.38);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+}
+
+.roadmap-item-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.roadmap-phase {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid rgba(255, 107, 61, 0.36);
+  border-radius: 100px;
+  padding: 6px 10px;
+}
+
+.roadmap-item-head h3 {
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.roadmap-time {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.roadmap-item p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-2);
 }
 
 /* ==========================================================================
@@ -802,22 +889,150 @@ const whyItems = [
   }
 }
 
+@media (max-width: 900px) {
+  .join-page-container .wrap {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .grid-layout {
+    width: 100%;
+  }
+
+  .proposal-console-wrapper {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 @media (max-width: 768px) {
   .join-hero {
-    padding-top: 120px;
+    padding-top: 108px;
+    padding-bottom: 64px;
   }
-  
+
+  .hero-main-title {
+    font-size: clamp(30px, 8.5vw, 42px);
+  }
+
+  .join-subtitle {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+
+  .system-status-tags {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .status-tag {
+    width: 100%;
+    justify-content: flex-start;
+    min-height: 40px;
+  }
+
   .form-row-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  
+
   .proposal-console-wrapper {
     margin-top: 12px;
   }
-  
+
   .proposal-form {
-    padding: 20px;
+    padding: 20px 16px;
+  }
+
+  .console-header {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+
+  .console-submit-btn {
+    min-height: 48px;
+  }
+
+  .join-section {
+    padding: 72px 0;
+  }
+
+  .section-title {
+    font-size: clamp(26px, 7vw, 34px);
+    margin-bottom: 32px;
+  }
+
+  .trait-item {
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 32px;
+  }
+
+  .roadmap-item {
+    padding: 18px 16px;
+  }
+
+  .roadmap-item-head {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .roadmap-item-head h3 {
+    font-size: 18px;
+  }
+
+  .roadmap-time {
+    font-size: 10px;
+  }
+
+  .why-grid {
+    gap: 16px;
+  }
+
+  .why-card {
+    padding: 24px 20px;
+  }
+
+  .roles-main-text {
+    font-size: 20px;
+    padding-right: 12px;
+  }
+
+  .roles-chevron {
+    flex-shrink: 0;
+  }
+
+  .role-tags {
+    gap: 10px;
+  }
+
+  .role-tag {
+    font-size: 11px;
+    padding: 10px 14px;
+  }
+
+  .cta-title {
+    font-size: clamp(26px, 7vw, 34px);
+  }
+
+  .cta-footnote {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .join-hero {
+    padding-top: 100px;
+  }
+
+  .resume-attachment-pointer {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 </style>

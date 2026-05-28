@@ -31,6 +31,11 @@ const router = createRouter({
       component: () => import('../views/JoinUsView.vue'),
     },
     {
+      path: '/plan',
+      name: 'plan',
+      component: () => import('../views/PlanView.vue'),
+    },
+    {
       path: '/platform',
       redirect: '/product',
     },

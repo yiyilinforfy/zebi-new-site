@@ -1,18 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
     <linearGradient id="laser" x1="0%" y1="100%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#FF6B3D" />
       <stop offset="100%" stop-color="#FF9B7D" />
     </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="1.6" result="blur" />
       <feComposite in="SourceGraphic" in2="blur" operator="over" />
     </filter>
   </defs>
 
-  <g transform="translate(20, 20)">
-    <rect x="0" y="0" width="40" height="8" fill="#E8EAF0" opacity="0.8" />
-    <rect x="0" y="32" width="40" height="8" fill="#E8EAF0" opacity="0.8" />
+  <g transform="translate(12, 12)">
+    <rect x="0" y="0" width="40" height="8" fill="#E8EAF0" opacity="0.9" />
+    <rect x="0" y="32" width="40" height="8" fill="#E8EAF0" opacity="0.9" />
     <polygon points="0,40 10,40 40,0 30,0" fill="url(#laser)" filter="url(#glow)" />
     <circle cx="40" cy="4" r="5" fill="#00F0FF" filter="url(#glow)" />
     <circle cx="0" cy="36" r="5" fill="#00F0FF" filter="url(#glow)" />
