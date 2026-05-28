@@ -41,10 +41,7 @@ jobs:
           const queries = [
             "space OR spacex OR nasa",
             "hyperscalers OR aws OR azure OR google cloud",
-            "satellite OR starlink",
-            "gpu OR ai infrastructure",
-            "datacenter OR edge computing",
-            "kubernetes OR cloud native"
+            "satellite OR starlink"
           ];
 
           async function fetchNews(query) {
