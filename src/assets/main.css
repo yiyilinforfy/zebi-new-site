@@ -1,0 +1,17 @@
+/* Reset Vue scaffold styles so HelioMind pages render 1:1 with source HTML */
+#app {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  font-weight: inherit;
+}
+
+#app a {
+  color: inherit;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+#app a:hover {
+  background-color: transparent;
+}
