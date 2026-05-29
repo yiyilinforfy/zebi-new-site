@@ -4,6 +4,7 @@ import { RouterLink, useRoute } from 'vue-router'
 import '@/assets/heliomind-brand.css'
 
 const menuOpen = ref(false)
+const isScrolled = ref(false)
 const route = useRoute()
 
 function toggleMenu() {
@@ -20,6 +21,10 @@ function onKeydown(event) {
   }
 }
 
+function onScroll() {
+  isScrolled.value = window.scrollY > 12
+}
+
 watch(
   () => route.path,
   () => {
@@ -33,16 +38,19 @@ watch(menuOpen, (open) => {
 
 onMounted(() => {
   window.addEventListener('keydown', onKeydown)
+  window.addEventListener('scroll', onScroll, { passive: true })
+  onScroll()
 })
 
 onUnmounted(() => {
   window.removeEventListener('keydown', onKeydown)
+  window.removeEventListener('scroll', onScroll)
   document.body.classList.remove('site-nav-open')
 })
 </script>
 
 <template>
-  <header class="site-nav" :class="{ 'is-menu-open': menuOpen }">
+  <header class="site-nav" :class="{ 'is-menu-open': menuOpen, 'is-scrolled': isScrolled }">
     <div class="wrap nav-wrap">
       <div class="nav-inner">
         <RouterLink to="/" class="brand brand-zebi" @click="closeMenu">

@@ -2,11 +2,16 @@
 import SiteHeader from '@/components/SiteHeader.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
 import '@/assets/heliomind-home.css'
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import homeHeroImage from '@/assets/images/home-hero.jpg'
 
 const router = useRouter()
+const mailObfuscation = {
+  local: ['z', 'e', 'b', 'i'].join(''),
+  encodedNumber: window.btoa('1867'),
+  domain: ['o', 'u', 't', 'l', 'o', 'o', 'k', '.', 'c', 'o', 'm'].join(''),
+}
 
 const tickerNews = ref([
   { source: 'ADA Space', title: '12 sats live', description: 'Orbital compute constellation is now operating in production.', image: '', url: '#' },
@@ -15,58 +20,48 @@ const tickerNews = ref([
   { source: 'Starcloud', title: 'H100 in orbit', description: 'GPU workloads in orbit continue proving real-world viability.', image: '', url: '#' },
 ])
 
-const tickerItems = computed(() => [...tickerNews.value, ...tickerNews.value])
-
-function handleNewsClick(url) {
-  if (!url || url === '#') return
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    window.open(url, '_blank', 'noopener,noreferrer')
-  } else {
-    router.push(url)
-  }
-}
-
 function goTo(path) {
   router.push(path)
 }
 
-const pillars = [
-  {
-    title: 'Orbit Economics',
-    description:
-      'Model the true cost of space AI. Launch vehicles, satellite BOM, on-orbit refresh, deorbit. Compare against terrestrial.',
-    href: '/product#economics',
-  },
-  {
-    title: 'Space Physics',
-    description:
-      'Simulate thermal radiation, orbital dynamics, solar power budgets. Heat is the first-class constraint in vacuum.',
-    href: '/product#physics',
-  },
-  {
-    title: 'Orbital Orchestration',
-    description:
-      'Schedule workloads around thermal windows. Route expert models across satellite types. Decide what belongs in space.',
-    href: '/product#orchestration',
-  },
-]
+function getJoinUsEmail() {
+  return `${mailObfuscation.local}${window.atob(mailObfuscation.encodedNumber)}@${mailObfuscation.domain}`
+}
 
-const spaceProductForms = [
-  { label: 'LEO Inference Swarm', href: '/product#constellation' },
-  { label: 'SSO Solar Training Cluster', href: '/product#scheduler' },
-  { label: 'Hybrid Earth-Orbit', href: '/product#sorter' },
-  { label: 'Serviceable Zebi-Lattice', href: '/product#library' },
-]
+function openJobApplication(roleTitle) {
+  const subject = encodeURIComponent(`Application: ${roleTitle}`)
+  window.location.href = `mailto:${getJoinUsEmail()}?subject=${subject}`
+}
 
-const spaceUsers = [
-  'Satellite operators',
-  'Space-hardened chip designers',
-  'Sovereign space programs',
-  'Orbital compute startups',
+const designMatrixModules = [
+  {
+    num: '/ 01',
+    title: 'Economic Engine',
+    subtitle: 'TCO across launch-cost curves',
+    description:
+      'Simulate sensitivity to launch vehicles, hardware depreciation cycles, and energy costs. Replaces speculation with stochastically sound cost models.',
+    href: '/product#tco',
+  },
+  {
+    num: '/ 02',
+    title: 'Thermal Digital Twin',
+    subtitle: 'Chip die to deep space vacuum',
+    description:
+      'Grounded in the Stefan-Boltzmann radiation law. Models interface drops across multi-phase cooling loop pipelines in microgravity environments.',
+    href: '/product#thermal',
+  },
+  {
+    num: '/ 03',
+    title: 'Orbital MoE Designer',
+    subtitle: 'Sparse expert topological mapping',
+    description:
+      'Calculates optimal placement of deep neural network experts across hardware swarms to compress required link bandwidth up to 50x.',
+    href: '/product#moe',
+  },
 ]
 
 onMounted(() => {
-  fetch(`${import.meta.env.BASE_URL}news.json`)
+  fetch('https://cdn.jsdelivr.net/gh/yiyilinforfy/zebi-site@main/public/news.json')
     .then((response) => response.json())
     .then((data) => {
       if (!Array.isArray(data?.news) || data.news.length === 0) return
@@ -101,36 +96,10 @@ onMounted(() => {
 <template>
   <SiteHeader />
   <main>
-    <section class="nasa-stream-section" aria-label="Latest Space News">
-      <div class="nasa-roll-mask">
-        <div class="nasa-roll-wrap">
-          <div class="nasa-roll-track">
-            <div
-              v-for="(item, idx) in tickerItems"
-              :key="idx"
-              class="nasa-mini-card"
-              :class="{ clickable: item.url && item.url !== '#' }"
-              @click="handleNewsClick(item.url)"
-            >
-              <div class="nasa-mini-media">
-                <img v-if="item.image" :src="item.image" :alt="item.title" class="nasa-mini-img" />
-                <div v-else class="nasa-mini-placeholder"></div>
-              </div>
-              <div class="nasa-mini-info">
-                <span class="nasa-mini-badge">{{ item.source }}</span>
-                <span class="nasa-mini-title">{{ item.title }}</span>
-              </div>
-              <span class="nasa-mini-divider">//</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <div class="starfield"></div>
 
     <section
-      class="hero hero-below-ticker portal-hero"
+      class="hero portal-hero"
       :style="{ backgroundImage: `linear-gradient(90deg, rgba(7, 9, 14, 0.96) 0%, rgba(7, 9, 14, 0.9) 28%, rgba(7, 9, 14, 0.55) 56%, rgba(7, 9, 14, 0.12) 100%), linear-gradient(180deg, rgba(7, 9, 14, 0) 58%, rgba(7, 9, 14, 0.72) 82%, rgba(7, 9, 14, 0.98) 100%), url(${homeHeroImage})` }"
     >
       <div class="wrap">
@@ -176,226 +145,241 @@ onMounted(() => {
       </div>
     </section> -->
 
-    <section class="portal-product" id="heliomind">
+    <section class="home-credibility">
       <div class="wrap">
-        <div class="portal-product-grid reveal">
-          <div>
-            <div class="section-eyebrow">Our first product</div>
-            <h2 class="section-title">HelioMind OS</h2>
-            <p class="hero-kicker">The design platform for space AI infrastructure.</p>
-            <p class="portal-defined-answer">It helps you answer questions that no one has ever had to ask before:</p>
-            <br>
-            <ul class="portal-question-list">
-              <li>Should this workload run in orbit or on the ground?</li>
-              <li>How much radiator do I need for a 1 MW satellite in LEO?</li>
-              <li>Which chip survives the radiation environment of SSO?</li>
-              <li>What's the 10-year cost of launching, operating, and refreshing a 500-sat constellation?</li>
+        <div class="reveal">
+          <div class="section-eyebrow">Operational Boundaries</div>
+          <h2 class="section-title">Defining the <em>Zebi Credibility Principle.</em></h2>
+        </div>
+        <div class="cred-grid reveal">
+          <article class="cred-col is">
+            <div class="cred-tag">// WHAT WE ARE</div>
+            <ul class="cred-list">
+              <li>
+                <strong>A Software Architecture Platform</strong>: We design HelioMind OS, an EDA
+                layer developed for simulating and scaling frontier computational networks.
+              </li>
+              <li>
+                <strong>Physics-Grounded Estimators</strong>: Every model in our cockpit is anchored
+                in absolute thermo-physical constants and launch-cost curves.
+              </li>
+              <li>
+                <strong>Neutral Infrastructure Tooling</strong>: We empower cloud consortia,
+                sovereign programs, and deep learning labs to simulate alternate infrastructure
+                paradigms before committing capex.
+              </li>
             </ul>
-            <p class="portal-product-foot">Eleven modules. One platform. Built by Zebi Lab.</p>
-          </div>
-          <div class="hero-visual portal-product-visual">
-            <div class="orbit-vis">
-              <div class="orbit-ring orbit-ring-1"></div>
-              <div class="orbit-ring orbit-ring-2"></div>
-              <div class="orbit-ring orbit-ring-3"></div>
-              <div class="planet"></div>
-              <div class="sat sat-1"></div>
-              <div class="sat sat-2"></div>
-              <div class="sat sat-3"></div>
-            </div>
-          </div>
+          </article>
+          <article class="cred-col is-not">
+            <div class="cred-tag">// WHAT WE ARE NOT</div>
+            <ul class="cred-list">
+              <li>
+                <strong>Not a Satellite Hardware Fab</strong>: We do not manufacture silicon,
+                construct spacecraft hardware, or operate satellite constellations.
+              </li>
+              <li>
+                <strong>Not a High-Risk Speculative Bet</strong>: We are a software-first
+                enterprise; our viability is decoupled from individual aerospace execution
+                parameters.
+              </li>
+              <li>
+                <strong>Not a Compute Brokerage</strong>: We do not operate an open cloud computing
+                marketplace or trade third-party server capacity.
+              </li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="portal-pillars" style="background: var(--bg-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <section class="home-philosophy">
       <div class="wrap">
         <div class="reveal">
-          <div class="section-eyebrow">Our Product Aims</div>
-          <h2 class="section-title">Three pillars.</h2>
+          <div class="section-eyebrow">Philosophical Core</div>
+          <h2 class="section-title">
+            Aligning the thermodynamics of silicon with the
+            <em>infinite resources of the sun.</em>
+          </h2>
         </div>
-        <div class="pillar-grid reveal">
-          <button
-            v-for="pillar in pillars"
-            :key="pillar.title"
-            type="button"
-            class="pillar-card"
-            @click="goTo(pillar.href)"
-          >
-            <div class="pillar-card-top">
-              <h3>{{ pillar.title }}</h3>
-              <span class="pillar-arrow" aria-hidden="true">→</span>
-            </div>
-            <p>{{ pillar.description }}</p>
-            <div class="pillar-note">{{ pillar.note }}</div>
-          </button>
+        <div class="mv-container reveal">
+          <article class="mv-box">
+            <div class="mv-tag">// Our Mission</div>
+            <p class="mv-text">
+              To untether global intelligence from the finite resource boundaries of Earth. By
+              building the standard software architecture for space-based computation, we enable
+              computing systems to capture <em>unattenuated solar energy</em> and unlock ultimate
+              scaling limits.
+            </p>
+          </article>
+          <article class="mv-box">
+            <div class="mv-tag">// Our Vision</div>
+            <p class="mv-text">
+              To establish <strong>HelioMind OS</strong> as the indispensable, vendor-neutral
+              intelligence layer for interplanetary infrastructure. A world where hyperscalers,
+              sovereign nations, and orbital operators do not guess, but design using the absolute
+              <em>laws of deep-space physics</em>.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
-
-        <!-- What you can design with HelioMind OS -->
-        <section class="portal-showcase">
+    <section class="home-live-signal">
       <div class="wrap">
         <div class="reveal">
-          <div class="section-eyebrow">Design library</div>
-          <h2 class="section-title showcase-title" style="margin-bottom: 70px;">What you can design <em>with HelioMind OS</em></h2>
-        </div>
-
-        <div class="showcase-grid reveal">
-          <div class="showcase-card" @click="goTo('/product#constellation')">
-            <div class="showcase-card-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.2"/>
-                <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                <line x1="12" y1="2" x2="12" y2="4" stroke="currentColor" stroke-width="1.2"/>
-                <line x1="12" y1="20" x2="12" y2="22" stroke="currentColor" stroke-width="1.2"/>
-                <line x1="2" y1="12" x2="4" y2="12" stroke="currentColor" stroke-width="1.2"/>
-                <line x1="20" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="1.2"/>
-              </svg>
-            </div>
-            <div class="showcase-card-content">
-              <h3>LEO Inference Swarm</h3>
-              <p>500-700 km low Earth orbit. Process Earth observation imagery at the source. Disposable inference satellites with annual refresh.</p>
-              <span class="showcase-card-link">Explore →</span>
-            </div>
-          </div>
-
-          <div class="showcase-card" @click="goTo('/product#scheduler')">
-            <div class="showcase-card-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L12 7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M12 17L12 22" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M2 12L7 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M17 12L22 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M12 9L12 12L14 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="showcase-card-content">
-              <h3>SSO Solar Training Cluster</h3>
-              <p>Dawn-dusk sun-synchronous orbit. 95% solar duty cycle. Designed for training-heavy workloads that tolerate orbital latency.</p>
-              <span class="showcase-card-link">Explore →</span>
-            </div>
-          </div>
-
-          <div class="showcase-card" @click="goTo('/product#sorter')">
-            <div class="showcase-card-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L12 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M12 18L12 22" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M2 12L6 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M18 12L22 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <circle cx="12" cy="12" r="2" fill="currentColor"/>
-                <path d="M6 6L8 8M18 18L16 16M18 6L16 8M6 18L8 16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="showcase-card-content">
-              <h3>Hybrid Earth-Orbit</h3>
-              <p>Ground campus for latency-critical inference and APIs. SSO cluster for training and synthetic data. Best of both physics regimes.</p>
-              <span class="showcase-card-link">Explore →</span>
-            </div>
-          </div>
-
-          <div class="showcase-card" @click="goTo('/product#library')">
-            <div class="showcase-card-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M8 4L8 20" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M16 4L16 20" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M4 8H6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M4 12H6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M18 8H20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                <path d="M18 12H20" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="showcase-card-content">
-              <h3>Serviceable Zebi-Lattice</h3>
-              <p>Tethered satellite lattice with swappable PC³ compute cassettes. Robotic Returnable Servicer Vehicle for 18-month chip refresh.</p>
-              <span class="showcase-card-link">Explore →</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Used by the teams building the space AI future -->
-    <section class="portal-ecosystem">
-      <div class="wrap">
-        <div class="ecosystem-inner reveal">
-          <h2 class="section-title showcase-title" style="margin-bottom: 70px;">Who uses <em>HelioMind OS?</em></h2>
-          <div class="ecosystem-grid">
-            <div class="ecosystem-category">
-              <div class="ecosystem-category-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L15 8.5L22 9.5L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9.5L9 8.5L12 2Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
-                </svg>
-              </div>
-              <h4>Satellite operators</h4>
-              <p>Designing orbital compute constellations from first principles</p>
-            </div>
-            <div class="ecosystem-category">
-              <div class="ecosystem-category-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.2"/>
-                  <path d="M9 8H15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                  <path d="M9 12H15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                  <path d="M9 16H13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <h4>Space-hardened chip designers</h4>
-              <p>Validating thermal and radiation tolerance pre-silicon</p>
-            </div>
-            <div class="ecosystem-category">
-              <div class="ecosystem-category-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 8V12L15 15" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.2"/>
-                </svg>
-              </div>
-              <h4>Sovereign space programs</h4>
-              <p>Building independent, air-gapped AI capacity</p>
-            </div>
-            <div class="ecosystem-category">
-              <div class="ecosystem-category-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M5 3L19 12L5 21V3Z" stroke="currentColor" stroke-width="1.2" fill="none"/>
-                  <path d="M9 9L15 12L9 15V9Z" fill="currentColor" opacity="0.5"/>
-                </svg>
-              </div>
-              <h4>Orbital compute startups</h4>
-              <p>Accelerating from concept to constellation design</p>
-            </div>
-          </div>
-
-          <!-- <div class="ecosystem-logos">
-            <div class="ecosystem-logos-track">
-              <span>ADA Space</span>
-              <span>SpaceX</span>
-              <span>Google Suncatcher</span>
-              <span>Starcloud</span>
-              <span>Blue Origin</span>
-              <span>Astro-Future</span>
-              <span>Orbital Chenguang</span>
-            </div>
-          </div> -->
-        </div>
-      </div>
-    </section>
-
-
-
-    <section class="portal-join">
-      <div class="wrap">
-        <div class="portal-join-card reveal">
-          <h2 class="section-title">We're a small team. <em>We're looking for more.</em></h2>
-          <p class="section-intro portal-join-copy">
-            If you're an engineer, physicist, or systems thinker who wants to build the platform for the space, we want to talk to you.
+          <div class="section-eyebrow">Constellation Telemetry</div>
+          <h2 class="section-title">Space AI <em>Live Signal</em></h2>
+          <p class="home-signal-intro">
+            Synchronize real-time global aerospace developments and core deep-space computational
+            metrics directly to the interface.
           </p>
-          <button type="button" class="btn-primary" @click="goTo('/join-us')">
-            <span>Join Zebi Lab</span>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="news-container reveal">
+          <div class="news-header-row">
+            <div class="news-title-tag">
+              <span class="news-blink"></span>
+              Deep Space Telemetry Stream // Active
+            </div>
+          </div>
+          <div class="news-grid">
+            <a
+              v-for="(item, idx) in tickerNews"
+              :key="`${item.title}-${idx}`"
+              class="news-item"
+              :href="item.url || '#'"
+              :target="item.url && item.url.startsWith('http') ? '_blank' : '_self'"
+              rel="noopener noreferrer"
+            >
+              <div class="news-item-media">
+                <img v-if="item.image" :src="item.image" :alt="item.title" class="news-item-image" />
+                <div v-else class="news-item-placeholder"></div>
+              </div>
+              <div class="news-item-content">
+                <div class="news-meta">Signal Source: {{ item.source }} // Live feed</div>
+                <div class="news-heading">{{ item.title }}</div>
+                <p v-if="item.description" class="news-desc">{{ item.description }}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-macro-trends">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="section-eyebrow">Macro-Economic Backdrop</div>
+          <h2 class="section-title">
+            The unavoidable physics driving <em>infrastructure offshoring.</em>
+          </h2>
+          <p class="home-signal-intro">
+            Global cloud consortia and front-line compute labs face equivalent physical constraints:
+            terrestrial energy bottlenecks combined with heavy junction thermal expansion are
+            pushing network design to orbital vectors.
+          </p>
+        </div>
+        <div class="grid-3 reveal">
+          <article class="cell">
+            <div class="cell-num">01 //</div>
+            <div class="cell-stat">100×</div>
+            <div class="cell-label">Compute vs Grid Mismatch</div>
+            <p>
+              As structural transistor density and thermal dissipation rates compound, AI workload
+              scaling is rapidly outstripping conventional terrestrial grid capacities.
+            </p>
+          </article>
+          <article class="cell">
+            <div class="cell-num">02 //</div>
+            <div class="cell-stat">5.4×</div>
+            <div class="cell-label">Unattenuated Solar Advantage</div>
+            <p>
+              By operating outside atmospheric dispersion limits, solar irradiance arrays achieve
+              more than five times the conversion efficiency of terrestrial fields.
+            </p>
+          </article>
+          <article class="cell">
+            <div class="cell-num">03 //</div>
+            <div class="cell-stat">EDA</div>
+            <div class="cell-label">The Missing Software Architecture</div>
+            <p>
+              The semiconductor explosion generated massive EDA infrastructure. Heterogeneous,
+              hyper-scale compute deployment design tools are wide open. This is Zebi space.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-design-matrix">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="section-eyebrow">The Sandbox Suite</div>
+          <h2 class="section-title">Integrated Design Matrix</h2>
+        </div>
+        <div class="module-list reveal">
+          <button
+            v-for="module in designMatrixModules"
+            :key="module.title"
+            type="button"
+            class="module-row"
+            @click="goTo(module.href)"
+          >
+            <div class="m-num">{{ module.num }}</div>
+            <div class="m-title">
+              {{ module.title }}
+              <span>{{ module.subtitle }}</span>
+            </div>
+            <p class="m-desc">{{ module.description }}</p>
           </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-join-engineer">
+      <div class="wrap">
+        <div class="reveal">
+          <div class="section-eyebrow">Zebi Lab Crew</div>
+          <h2 class="section-title">Help us engineer the <em>Solar AI Civilization.</em></h2>
+        </div>
+        <div class="join-grid reveal">
+          <div class="join-manifesto">
+            <p>
+              We reject standard technology design methodologies. At <strong>Zebi Lab</strong>, we
+              only accept the fundamental laws of physics as hard constraints.
+            </p>
+            <p>
+              We are a high-density, flat-topology cluster of systems architects, aerospace hardware
+              advisors, and distributed computing experts. If you want to govern kilowatts per
+              metric ton under space environments, transmit credentials below.
+            </p>
+          </div>
+          <div class="jobs-list">
+            <button
+              type="button"
+              class="job-card"
+              @click="openJobApplication('Distributed MoE Network Architect')"
+            >
+              <div>
+                <div class="job-title">Distributed MoE Network Architect</div>
+                <div class="job-dept">Compute Layer // Singapore or Palo Alto</div>
+              </div>
+              <div class="job-arrow">→</div>
+            </button>
+            <button
+              type="button"
+              class="job-card"
+              @click="openJobApplication('Spacecraft Thermal Systems Engineer')"
+            >
+              <div>
+                <div class="job-title">Spacecraft Thermal Systems Engineer</div>
+                <div class="job-dept">Physical Stack // Delaware or Remote</div>
+              </div>
+              <div class="job-arrow">→</div>
+            </button>
+            <button type="button" class="btn-primary home-join-btn" @click="goTo('/join-us')">
+              Join Zebi Lab
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -699,6 +683,492 @@ onMounted(() => {
 .portal-chip-action:focus-visible {
   outline: 2px solid var(--orange);
   outline-offset: 2px;
+}
+
+.home-credibility,
+.home-philosophy,
+.home-live-signal,
+.home-macro-trends,
+.home-design-matrix,
+.home-join-engineer {
+  border-top: 1px solid var(--border);
+}
+
+.home-credibility,
+.home-philosophy,
+.home-live-signal,
+.home-macro-trends,
+.home-design-matrix {
+  padding: 88px 0;
+}
+
+.home-join-engineer {
+  padding: 88px 0 110px;
+}
+
+.cred-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 40px;
+}
+
+.cred-col {
+  padding: 40px 34px;
+  background: var(--bg-2);
+}
+
+.cred-col.is {
+  border-left: 2px solid var(--cyan);
+}
+
+.cred-col.is-not {
+  border-left: 2px solid var(--red);
+}
+
+.cred-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.cred-col.is .cred-tag {
+  color: var(--cyan);
+}
+
+.cred-col.is-not .cred-tag {
+  color: var(--red);
+}
+
+.cred-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cred-list li {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.65;
+}
+
+.cred-list li strong {
+  color: var(--text);
+}
+
+.mv-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.mv-box {
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  padding: 34px 28px;
+}
+
+.mv-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+
+.mv-text {
+  font-family: var(--display);
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+.mv-text em {
+  color: var(--orange);
+}
+
+.mv-text strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.home-signal-intro {
+  margin-top: 12px;
+  color: var(--text-2);
+  font-size: 16px;
+  max-width: 760px;
+  line-height: 1.6;
+}
+
+.news-container {
+  margin-top: 28px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  padding: 26px;
+}
+
+.news-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+}
+
+.news-title-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.news-blink {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: signalBlink 1.8s infinite;
+}
+
+@keyframes signalBlink {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.news-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.news-item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  text-decoration: none;
+  border-left: 2px solid var(--border);
+  padding: 6px 0 6px 14px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.news-item:hover {
+  border-left-color: var(--orange);
+  background: color-mix(in srgb, var(--bg-2) 84%, var(--orange-soft) 16%);
+}
+
+.news-item-media {
+  width: 120px;
+  height: 72px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.news-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-item-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 107, 61, 0.1), rgba(110, 201, 217, 0.08));
+}
+
+.news-item-content {
+  min-width: 0;
+}
+
+.news-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.news-heading {
+  font-family: var(--display);
+  font-size: 18px;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.news-desc {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 38px;
+}
+
+.cell {
+  background: var(--bg-2);
+  padding: 34px 28px;
+}
+
+.cell-num {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+
+.cell-stat {
+  font-family: var(--display);
+  font-size: 42px;
+  line-height: 1;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.cell-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin-bottom: 14px;
+}
+
+.cell p {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.62;
+}
+
+.module-list {
+  margin-top: 34px;
+  border-top: 1px solid var(--border);
+}
+
+.module-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 72px 1.1fr 2fr;
+  gap: 22px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: inherit;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.module-row:hover {
+  background: linear-gradient(90deg, rgba(255, 107, 61, 0.08), transparent);
+}
+
+.m-num {
+  font-family: var(--mono);
+  color: var(--orange);
+  font-size: 12px;
+}
+
+.m-title {
+  font-family: var(--display);
+  font-size: 24px;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.m-title span {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--orange);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.m-desc {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.64;
+}
+
+.join-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.join-manifesto {
+  display: grid;
+  gap: 16px;
+}
+
+.join-manifesto p {
+  font-family: var(--display);
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.join-manifesto strong {
+  color: var(--text);
+}
+
+.jobs-list {
+  display: grid;
+  gap: 12px;
+}
+
+.job-card {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  appearance: none;
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.job-card:hover {
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+
+.job-title {
+  font-family: var(--display);
+  color: var(--text);
+  font-size: 20px;
+}
+
+.job-dept {
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--orange);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.job-arrow {
+  color: var(--text-3);
+  font-size: 18px;
+}
+
+.home-join-btn {
+  margin-top: 10px;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .module-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .join-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-credibility,
+  .home-philosophy,
+  .home-live-signal,
+  .home-macro-trends,
+  .home-design-matrix {
+    padding: 64px 0;
+  }
+
+  .home-join-engineer {
+    padding: 64px 0 84px;
+  }
+
+  .cred-grid,
+  .mv-container {
+    grid-template-columns: 1fr;
+  }
+
+  .cred-col,
+  .mv-box,
+  .news-container,
+  .cell {
+    padding: 22px 18px;
+  }
+
+  .mv-text,
+  .join-manifesto p {
+    font-size: 18px;
+  }
+
+  .home-signal-intro {
+    font-size: 14px;
+  }
+
+  .news-heading {
+    font-size: 16px;
+  }
+
+  .news-item {
+    grid-template-columns: 1fr;
+    padding-left: 10px;
+  }
+
+  .news-item-media {
+    width: 100%;
+    height: 150px;
+  }
+
+  .m-title {
+    font-size: 20px;
+  }
+
+  .job-title {
+    font-size: 17px;
+  }
 }
 </style>
 

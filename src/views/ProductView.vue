@@ -11,6 +11,7 @@ const router = useRouter()
 const categoryIds = ['economics', 'physics', 'orchestration']
 const quickJumpIds = ['thesis', 'architecture', 'unit-cell', 'modules', 'landscape']
 const activeModuleId = ref(null)
+const isQuickJumpStuck = ref(false)
 
 function goTo(path) {
   router.push(path)
@@ -44,16 +45,44 @@ function onCategoryTabClick(event, targetId) {
   window.scrollTo({ top, behavior: 'smooth' })
 }
 
-function onQuickJumpClick(event, targetId) {
-  event.preventDefault()
-  const section = document.getElementById(targetId)
-  if (!section) return
+// [1,3,4,2,2]
+function findDuplicate(nums) {
 
-  const headerHeight = document.querySelector('header')?.getBoundingClientRect().height || 0
-  const quickJumpHeight =
-    document.querySelector('.platform-quick-jump')?.getBoundingClientRect().height || 0
-  const top = window.scrollY + section.getBoundingClientRect().top - headerHeight - quickJumpHeight - 16
-  window.scrollTo({ top, behavior: 'smooth' })
+  let slow = nums[0]
+  let fast = nums[0]
+
+  while(slow !== fast){
+    slow = nums[slow]
+    fast = nums[nums[fast]]
+  }
+
+  slow = nums[0]
+
+  while(slow !== fast){
+    slow = nums[slow]
+    fast = nums[fast]
+  }
+  return slow
+    
+}
+
+function isHappy(n) {
+
+  let slow = n
+  let fast = n
+
+  let getCal = (number) => number.toString().split('').map(Number).reduce((a,c)=> a + c*c, 0)
+
+  do {
+    slow = getCal(slow)
+    fast = getCal(getCal(fast))
+    if(slow === 1 || fast === 1){
+      return true
+    }
+  } while(slow !== fast)
+
+  return false
+    
 }
 
 function updateActiveCategoryTab() {
@@ -101,6 +130,15 @@ function updateActiveQuickJumpTab() {
   })
 }
 
+function updateQuickJumpStickyState() {
+  const quickJump = document.querySelector('.platform-quick-jump')
+  if (!quickJump) return
+
+  const headerHeight = document.querySelector('header')?.getBoundingClientRect().height || 0
+  const top = quickJump.getBoundingClientRect().top
+  isQuickJumpStuck.value = top <= headerHeight + 1
+}
+
 const loadChart = () =>
   new Promise((resolve) => {
     if (window.Chart) {
@@ -124,13 +162,18 @@ onMounted(async () => {
   initPlatformPage()
   updateActiveCategoryTab()
   updateActiveQuickJumpTab()
+  updateQuickJumpStickyState()
   window.addEventListener('scroll', updateActiveCategoryTab, { passive: true })
   window.addEventListener('scroll', updateActiveQuickJumpTab, { passive: true })
+  window.addEventListener('scroll', updateQuickJumpStickyState, { passive: true })
+  window.addEventListener('resize', updateQuickJumpStickyState)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', updateActiveCategoryTab)
   window.removeEventListener('scroll', updateActiveQuickJumpTab)
+  window.removeEventListener('scroll', updateQuickJumpStickyState)
+  window.removeEventListener('resize', updateQuickJumpStickyState)
 })
 </script>
 
@@ -157,14 +200,14 @@ onUnmounted(() => {
   </div>
 </section>
 
-<section class="platform-quick-jump">
+<section class="platform-quick-jump" :class="{ 'is-stuck': isQuickJumpStuck }">
   <div class="wrap">
     <div class="platform-quick-jump-links">
-      <a href="#thesis" @click="onQuickJumpClick($event, 'thesis')"><span class="jump-num">01</span><span>Thesis</span></a>
-      <a href="#architecture" @click="onQuickJumpClick($event, 'architecture')"><span class="jump-num">02</span><span>Architecture</span></a>
-      <a href="#unit-cell" @click="onQuickJumpClick($event, 'unit-cell')"><span class="jump-num">03</span><span>Unit Cell</span></a>
-      <a href="#modules" @click="onQuickJumpClick($event, 'modules')"><span class="jump-num">04</span><span>Modules</span></a>
-      <a href="#landscape" @click="onQuickJumpClick($event, 'landscape')"><span class="jump-num">05</span><span>Landscape</span></a>
+      <a href="#thesis"><span class="jump-num">01</span><span>Thesis</span></a>
+      <a href="#architecture"><span class="jump-num">02</span><span>Architecture</span></a>
+      <a href="#unit-cell"><span class="jump-num">03</span><span>Unit Cell</span></a>
+      <a href="#modules"><span class="jump-num">04</span><span>Modules</span></a>
+      <a href="#landscape"><span class="jump-num">05</span><span>Landscape</span></a>
     </div>
   </div>
 </section>
@@ -516,11 +559,11 @@ onUnmounted(() => {
         <div class="module-summary-id">/ 01</div>
         <div>
           <h3 class="module-summary-title">Economic Engine</h3>
-          <p class="module-summary-desc">Compare terrestrial vs orbital TCO over 10 years.</p>
+          <p class="module-summary-desc">TCO optimization across deployment profiles.</p>
         </div>
       </div>
       <div class="module-summary-side">
-        <div class="module-summary-preview">Launch: $1,500/kg → TCO: 2.4×</div>
+        <div class="module-summary-preview">Stochastic deployment profile simulation</div>
         <div class="module-summary-toggle">{{ activeModuleId === 'tco' ? 'Collapse' : 'Expand' }}</div>
       </div>
       <div class="module-summary-arrow" :class="{ 'is-open': activeModuleId === 'tco' }">⌄</div>
@@ -529,22 +572,22 @@ onUnmounted(() => {
       <div class="module-header">
         <div>
           <div class="module-meta">/ 01 · Economic Engine</div>
-          <div class="module-title">TCO across <em>launch-cost curves</em>.</div>
+          <div class="module-title">TCO optimization across <em>deployment profiles</em>.</div>
         </div>
         <div class="module-description">
-          Compare terrestrial vs orbital TCO over 10 years. Adjust launch cost ($/kg), chip
-          refresh cycles, and energy price. See the orbital premium in real time. Launch cost to
-          LEO is the single most sensitive variable.
+          Evaluate sensitivity equations for highly heterogenous capital build-outs. Modulate
+          execution metrics including cargo launch vectors, orbital component hardware depreciation
+          intervals, and primary power metrics to resolve asset convergence curves.
         </div>
       </div>
 
     <div class="panel-grid">
       <div class="control-panel">
-        <div class="control-panel-header">Inputs</div>
+        <div class="control-panel-header">Simulation Framework</div>
 
         <div class="control">
           <div class="control-label">
-            <span class="control-label-text">Target compute capacity</span>
+            <span class="control-label-text">Target compute scaling</span>
             <span class="control-label-value" id="tco-mw-label">100 MW</span>
           </div>
           <input type="range" id="tco-mw" min="10" max="1000" value="100" step="10" />
@@ -553,7 +596,7 @@ onUnmounted(() => {
 
         <div class="control">
           <div class="control-label">
-            <span class="control-label-text">Launch cost</span>
+            <span class="control-label-text">Launch variable cost</span>
             <span class="control-label-value" id="tco-launch-label">$1,500/kg</span>
           </div>
           <input type="range" id="tco-launch" min="100" max="3500" value="1500" step="100" />
@@ -562,7 +605,7 @@ onUnmounted(() => {
 
         <div class="control">
           <div class="control-label">
-            <span class="control-label-text">Satellite cost per watt</span>
+            <span class="control-label-text">Space hardware BOM</span>
             <span class="control-label-value" id="tco-satcost-label">$22/W</span>
           </div>
           <input type="range" id="tco-satcost" min="5" max="50" value="22" step="1" />
@@ -580,7 +623,7 @@ onUnmounted(() => {
 
         <div class="control">
           <div class="control-label">
-            <span class="control-label-text">Terrestrial energy cost</span>
+            <span class="control-label-text">Terrestrial power rate</span>
             <span class="control-label-value" id="tco-energy-label">$0.06/kWh</span>
           </div>
           <input type="range" id="tco-energy" min="0.03" max="0.20" value="0.06" step="0.01" />
@@ -591,7 +634,7 @@ onUnmounted(() => {
       <div class="output-panel">
         <div class="kpi-grid">
           <div class="kpi">
-            <div class="kpi-label">Terrestrial 10y TCO</div>
+            <div class="kpi-label">Terrestrial Base TCO</div>
             <div class="kpi-value cyan" id="kpi-ground">$0.0B</div>
             <div class="kpi-sub">capex + opex</div>
           </div>
@@ -601,25 +644,25 @@ onUnmounted(() => {
             <div class="kpi-sub">relaunch every cycle</div>
           </div>
           <div class="kpi">
-            <div class="kpi-label">Serviceable orbital</div>
+            <div class="kpi-label">Zebi Serviceable Array</div>
             <div class="kpi-value orange" id="kpi-zebi">$0.0B</div>
             <div class="kpi-sub">cassette swaps</div>
           </div>
           <div class="kpi">
-            <div class="kpi-label">Cost multiple</div>
+            <div class="kpi-label">Efficiency Delta</div>
             <div class="kpi-value green" id="kpi-multiple">0.0×</div>
             <div class="kpi-sub">orbital vs ground</div>
           </div>
         </div>
 
         <div class="chart-container tall">
-          <div class="chart-title">Cumulative TCO · USD billions over 10 years</div>
+          <div class="chart-title">Cumulative TCO Simulation · USD billions</div>
           <canvas id="tco-chart"></canvas>
         </div>
 
         <div class="verdict">
-          <div class="verdict-label">Verdict</div>
-          <div class="verdict-text" id="tco-verdict">Adjust the inputs to update the model.</div>
+          <div class="verdict-label">Stochastic Evaluation</div>
+          <div class="verdict-text" id="tco-verdict">Calibrating economic curves based on physical constraints...</div>
         </div>
       </div>
     </div>
@@ -858,11 +901,11 @@ onUnmounted(() => {
         <div class="module-summary-id">/ 02</div>
         <div>
           <h3 class="module-summary-title">Thermal Digital Twin</h3>
-          <p class="module-summary-desc">Pick any chip. See radiator area and mass.</p>
+          <p class="module-summary-desc">Thermal modeling from silicon junction to vacuum.</p>
         </div>
       </div>
       <div class="module-summary-side">
-        <div class="module-summary-preview">H100 → 156 m²</div>
+        <div class="module-summary-preview">Stefan-Boltzmann boundary mapping</div>
         <div class="module-summary-toggle">
           {{ activeModuleId === 'thermal' ? 'Collapse' : 'Expand' }}
         </div>
@@ -877,21 +920,22 @@ onUnmounted(() => {
       <div class="module-header">
         <div>
           <div class="module-meta">/ 02 · Thermal Digital Twin</div>
-          <div class="module-title">Chip die to <em>deep space</em>.</div>
+          <div class="module-title">Thermal modeling from <em>silicon junction to vacuum</em>.</div>
         </div>
         <div class="module-description">
-          Pick any chip — H100, Blackwell, TPU, or SpaceX D3. See how much radiator area you need
-          and why burst scheduling saves mass. In vacuum, heat only radiates.
+          Analytic engine mapping thermal limits using the Stefan-Boltzmann radiation law.
+          Determines configuration geometry and radiative dissipation footprints across active
+          liquid loop systems under microgravity parameters.
         </div>
       </div>
 
     <div class="panel-grid">
       <div class="control-panel">
-        <div class="control-panel-header">Node configuration</div>
+        <div class="control-panel-header">Hardware Specification</div>
 
         <div class="control">
           <div class="control-label">
-            <span class="control-label-text">Chip family</span>
+            <span class="control-label-text">Silicon substrate</span>
           </div>
           <select id="th-chip">
             <option value="h100" data-tdp="700" data-tmax="92">NVIDIA H100 · 700W · 92°C</option>
@@ -907,7 +951,7 @@ onUnmounted(() => {
 
         <div class="control">
           <div class="control-label">
-            <span class="control-label-text">Node power</span>
+            <span class="control-label-text">Aggregate node load</span>
             <span class="control-label-value" id="th-power-label">100 kW</span>
           </div>
           <input type="range" id="th-power" min="10" max="500" value="100" step="10" />
@@ -945,24 +989,24 @@ onUnmounted(() => {
       <div class="output-panel">
         <div class="kpi-grid">
           <div class="kpi">
-            <div class="kpi-label">Radiator area</div>
+            <div class="kpi-label">Required Radiator Area</div>
             <div class="kpi-value orange" id="kpi-radarea">0 m²</div>
             <div class="kpi-sub">deployable wing</div>
           </div>
           <div class="kpi">
-            <div class="kpi-label">Heat flux</div>
+            <div class="kpi-label">Effective Heat Flux</div>
             <div class="kpi-value cyan" id="kpi-heatflux">0 W/m²</div>
             <div class="kpi-sub">effective emission</div>
           </div>
           <div class="kpi">
-            <div class="kpi-label">Radiator mass</div>
+            <div class="kpi-label">Radiator Structural Mass</div>
             <div class="kpi-value" id="kpi-radmass">0 kg</div>
-            <div class="kpi-sub">≈ 1.2 kg/m²</div>
+            <div class="kpi-sub">thermal subsystem only</div>
           </div>
           <div class="kpi">
-            <div class="kpi-label">Total node mass</div>
+            <div class="kpi-label">Subsystem Structural Mass</div>
             <div class="kpi-value green" id="kpi-nodemass">0 kg</div>
-            <div class="kpi-sub">all subsystems</div>
+            <div class="kpi-sub">full node estimate</div>
           </div>
         </div>
 
@@ -994,8 +1038,8 @@ onUnmounted(() => {
         </div>
 
         <div class="verdict">
-          <div class="verdict-label">Engineering verdict</div>
-          <div class="verdict-text" id="th-verdict">Pick a chip family above.</div>
+          <div class="verdict-label">Thermodynamic Analysis</div>
+          <div class="verdict-text" id="th-verdict">Awaiting control parameter matrix input...</div>
         </div>
       </div>
     </div>
@@ -1912,6 +1956,71 @@ onUnmounted(() => {
       <div class="compet-card"><div class="compet-name">Astro-Future Institute</div><div class="compet-region">China · Beijing</div><div class="compet-status research">2026 demo</div><p class="compet-bet">16-sat GW data centers. Backed by Lenovo and Beijing municipal government.</p></div>
       <div class="compet-card"><div class="compet-name">Orbital Chenguang</div><div class="compet-region">China · CASC backed</div><div class="compet-status planning">Chenguang-1 pending</div><p class="compet-bet">15th Five-Year Plan tie-in. $8.4B in credit lines for GW-scale infrastructure.</p></div>
       <div class="compet-card us"><div class="compet-name">HelioMind</div><div class="compet-region">SG · Delaware</div><div class="compet-status">The OS layer</div><p class="compet-bet">Design platform for all of the above. Cadence/Synopsys for AI infrastructure. The OS no one else is building.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="product-landscape-showcase">
+  <div class="wrap">
+    <div class="platform-knowledge-head">
+      <div class="platform-knowledge-eyebrow">Design library</div>
+      <h2>What you can design <em>with HelioMind OS</em></h2>
+    </div>
+    <div class="product-showcase-grid">
+      <button type="button" class="product-showcase-card" @click="goTo('/product#constellation')">
+        <div class="product-showcase-title">LEO Inference Swarm</div>
+        <p>
+          500-700 km low Earth orbit. Process Earth observation imagery at the source with
+          disposable inference satellites and annual refresh.
+        </p>
+      </button>
+      <button type="button" class="product-showcase-card" @click="goTo('/product#scheduler')">
+        <div class="product-showcase-title">SSO Solar Training Cluster</div>
+        <p>
+          Dawn-dusk sun-synchronous orbit with 95% solar duty cycle, designed for training-heavy
+          workloads that tolerate orbital latency.
+        </p>
+      </button>
+      <button type="button" class="product-showcase-card" @click="goTo('/product#sorter')">
+        <div class="product-showcase-title">Hybrid Earth-Orbit</div>
+        <p>
+          Ground campus for latency-critical inference and APIs, SSO cluster for training and
+          synthetic data. Best of both physics regimes.
+        </p>
+      </button>
+      <button type="button" class="product-showcase-card" @click="goTo('/product#library')">
+        <div class="product-showcase-title">Serviceable Zebi-Lattice</div>
+        <p>
+          Tethered satellite lattice with swappable PC-cube compute cassettes and robotic service
+          cycles for rapid chip refresh.
+        </p>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="product-landscape-ecosystem">
+  <div class="wrap">
+    <div class="platform-knowledge-head">
+      <h2>Who uses <em>HelioMind OS?</em></h2>
+    </div>
+    <div class="product-ecosystem-grid">
+      <article class="product-ecosystem-card">
+        <h4>Satellite operators</h4>
+        <p>Designing orbital compute constellations from first principles.</p>
+      </article>
+      <article class="product-ecosystem-card">
+        <h4>Space-hardened chip designers</h4>
+        <p>Validating thermal and radiation tolerance pre-silicon.</p>
+      </article>
+      <article class="product-ecosystem-card">
+        <h4>Sovereign space programs</h4>
+        <p>Building independent, air-gapped AI capacity.</p>
+      </article>
+      <article class="product-ecosystem-card">
+        <h4>Orbital compute startups</h4>
+        <p>Accelerating from concept to constellation design.</p>
+      </article>
     </div>
   </div>
 </section>
