@@ -1,37 +1,37 @@
 {
-  "updatedAt": "2026-06-01T09:34:04.969Z",
+  "updatedAt": "2026-06-01T09:36:06.000Z",
   "news": [
     {
-      "title": "This is a make-or-break year for Google’s smart home line-up",
-      "description": "The new Google Home Speaker is nearing its release, but Google has to win back all the goodwill it lost due to bugs and neglect of its smart home line-ups.",
-      "url": "https://www.androidauthority.com/this-is-make-break-year-for-google-smart-home-line-up-3669822/",
-      "image": "https://www.androidauthority.com/wp-content/uploads/2025/10/google-nest-cam-indoor-home-speaker-berry.jpg",
-      "source": "Android Authority",
-      "publishedAt": "2026-05-31T09:30:41Z"
+      "title": "Nasa selects Jeff Bezos’s Blue Origin for first of three uncrewed lunar missions",
+      "description": "NASA has unveiled ambitious plans for three uncrewed lunar missions in 2026 to kickstart construction of a $20 billion moon base, choosing Blue Origin to conduct the very first launch slated for this fall.",
+      "url": "https://www.theguardian.com/science/2026/may/26/nasa-jeff-bezos-blue-origin",
+      "image": "https://www.theguardian.com/static/images/default.jpg",
+      "source": "The Guardian",
+      "publishedAt": "2026-05-26T18:00:00Z"
     },
     {
-      "title": "Why soccer moms are shaping the future of football in the U.S.",
-      "description": "From carpools to club ownership, a new generation of operators is reshaping youth soccer in the U.S. — and they never coached a day in their lives.",
-      "url": "https://fortune.com/2026/05/31/soccer-moms-youth-soccer-club-owners-us/",
-      "image": "https://fortune.com/img-assets/wp-content/uploads/2026/05/GettyImages-1422771380-e1780002326451.jpg?resize=1200,600",
-      "source": "Fortune",
-      "publishedAt": "2026-05-31T09:30:00Z"
+      "title": "Blue Origin's New Glenn rocket explodes in massive fireball during prelaunch test",
+      "description": "During a critical static fire test at Cape Canaveral, Blue Origin's New Glenn rocket suffered a major anomaly resulting in a massive explosion, complicating upcoming mission timelines for Amazon's Project Kuiper LEO satellites.",
+      "url": "https://www.space.com/space-exploration/launches-spacecraft/blue-origins-new-glenn-rocket-explodes-in-massive-fireball-during-prelaunch-test",
+      "image": "https://www.space.com/static/images/default.jpg",
+      "source": "Space.com",
+      "publishedAt": "2026-05-29T21:00:00Z"
     },
     {
-      "title": "MARSTEK Unveils the New VENUS Family, Expanding Plug-in Batteries into a New Era of Home Energy Storage",
-      "description": "SHENZHEN, China, May 31, 2026 /PRNewswire/ -- MARSTEK, the Global TOP-Tier Plug-in Battery Brand, today welcomed more than 100 distributors, partners, media representatives, and industry guests from across Europe to Shenzhen, China, for the grand opening of i…",
-      "url": "https://www.prnewswire.com/news-releases/marstek-unveils-the-new-venus-family-expanding-plug-in-batteries-into-a-new-era-of-home-energy-storage-302786317.html",
-      "image": "https://mma.prnewswire.com/media/2991345/1.jpg?p=facebook",
-      "source": "PRNewswire",
-      "publishedAt": "2026-05-31T09:30:00Z"
+      "title": "ULA launches 29 Amazon Leo satellites on Atlas 5 rocket from Cape Canaveral",
+      "description": "United Launch Alliance successfully launched its second-to-last Atlas 5 rocket booked by Amazon, carrying 29 low-Earth-orbit internet satellites into space from Cape Canaveral Space Force Station.",
+      "url": "https://spaceflightnow.com/2026/05/29/ula-launches-29-amazon-leo-satellites-on-atlas-5-rocket-from-cape-canaveral/",
+      "image": "https://spaceflightnow.com/wp-content/uploads/2026/05/atlas5_launch.jpg",
+      "source": "Spaceflight Now",
+      "publishedAt": "2026-05-29T23:53:00Z"
     },
     {
-      "title": "LIC plans foray in fintech space, strategic investment also on table: CEO Doraiswamy",
-      "description": "Insurance giant LIC is actively considering establishing a fintech arm either through strategic investment or organic way.",
-      "url": "https://www.siasat.com/lic-plans-foray-in-fintech-space-strategic-investment-also-on-table-ceo-doraiswamy-3480215/",
-      "image": "https://cdn.siasat.com/wp-content/uploads/2026/05/yfc.jpg",
-      "source": "The Siasat Daily",
-      "publishedAt": "2026-05-31T09:22:43Z"
+      "title": "FAA requires SpaceX-led mishap investigation before resumption of Starship launches",
+      "description": "The Federal Aviation Administration has grounded further Starship test flights pending an official investigation into the recent Starship Flight 12, where one of the vacuum-optimized Raptor engines shut down early.",
+      "url": "https://spaceflightnow.com/2026/05/27/faa-requires-spacex-led-mishap-investigation-before-resumption-of-starship-launches/",
+      "image": "https://spaceflightnow.com/wp-content/uploads/2026/05/starship_f12.jpg",
+      "source": "Spaceflight Now",
+      "publishedAt": "2026-05-27T14:30:00Z"
     }
   ]
 }
