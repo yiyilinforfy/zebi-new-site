@@ -39,9 +39,9 @@ jobs:
           const axios = require("axios");
 
           const queries = [
-            "space OR spacex OR nasa",
-            "hyperscalers OR aws OR azure OR google cloud",
-            "satellite OR starlink"
+            "space",
+            "hyperscalers",
+            "satellite"
           ];
 
           async function fetchNews(query) {
