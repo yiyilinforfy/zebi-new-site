@@ -1,37 +1,37 @@
 {
-  "updatedAt": "2026-06-03T16:45:50.355Z",
+  "updatedAt": "2026-06-04T03:50:24.865Z",
   "news": [
     {
-      "title": "Wolfbox DF100 150000 RPM Cordless Air Blower/Duster $39 + Free S&H (2 replies)",
-      "description": "deal [aliexpress.us]\n\n$39 + Free S/H w/ code USDEAL3Working time: 10 - 100 min\nCharging time: 2 hours 40 min (do not use while charging)\nBuilt with a 6000mAh battery and USB-C charging, it's eco-",
-      "url": "https://slickdeals.net/f/19587342-wolfbox-df100-150000-rpm-cordless-air-blower-duster-39-free-s-h",
-      "image": "https://slickdeals.net/attachment/9/5/3/2/3/450x450/20567202.thumb",
+      "title": "dframe-trace added to PyPI",
+      "description": "Automatic causal tracing for Python DataFrame pipelines: find where nulls, rows, and dtypes silently changed.",
+      "url": "https://pypi.org/project/dframe-trace/",
+      "image": "https://pypi.org/static/images/twitter.abaf4b19.webp",
+      "source": "Pypi.org",
+      "publishedAt": "2026-06-03T03:46:00Z"
+    },
+    {
+      "title": "Pre-owned 3-row family SUV? Five solid picks for balik kampung: CX-8, Allspace, X90, Tiggo 8 Pro, X-Trail",
+      "description": "The kids are getting bigger, the in-laws keep tagging along on weekend makan trips, and that five-seater is starting to feel like a clown car every time you load up for a balik kampung run. […]\nThe post Pre-owned 3-row family SUV? Five solid picks for balik k…",
+      "url": "https://paultan.org/2026/06/03/pre-owned-3-row-family-suv-five-solid-picks-for-balik-kampung-cx-8-allspace-x90-tiggo-8-pro-x-trail/",
+      "image": "https://paultan.org/image/2026/06/3-row-suvs-1200x630.png",
+      "source": "Paul Tan's Automotive News",
+      "publishedAt": "2026-06-03T03:42:44Z"
+    },
+    {
+      "title": "SucceBuy Commercial Vacuum Sealer Machine $36 + Free S/H (4 replies)",
+      "description": "deal [aliexpress.us]\n\n$36 + Free S/H w/ code IFPNDEIY",
+      "url": "https://slickdeals.net/f/19589139-succebuy-commercial-vacuum-sealer-machine-36-free-s-h",
+      "image": "https://slickdeals.net/attachment/9/5/3/2/3/450x450/20572671.thumb",
       "source": "Slickdeals.net",
-      "publishedAt": "2026-06-02T16:45:37Z"
+      "publishedAt": "2026-06-03T03:41:50Z"
     },
     {
-      "title": "I’d Rather Spend Money On Marketing!",
-      "description": "Read the article: \"I’d Rather Spend Money On Marketing!\"",
-      "url": "https://boldip.com/blog/id-rather-spend-money-on-marketing/",
-      "image": "https://boldip.com/wp-content/uploads/2023/08/ogimg.jpg",
-      "source": "Boldip.com",
-      "publishedAt": "2026-06-02T16:45:28Z"
-    },
-    {
-      "title": "Saudi Arabia imports sand — despite being a country dominated by desert, the sand of the Arabian Peninsula is too smooth and round for use in construction concrete, because thousands of years of wind erosion have polished the grains to a shape that does not bond well with cement, and most construction sand must be imported from countries like Australia",
-      "description": "In 2023, Saudi Arabia paid approximately $140,000 to import construction-grade sand from Australia. The figure is small in dollar terms, but the trade flow it represents is the visible part of a much larger phenomenon. Saudi Arabia, a country dominated by som…",
-      "url": "https://spacedaily.com/d-saudi-arabia-imports-sand-despite-being-a-country-dominated-by-desert-the-sand-of-the-arabian-peninsula-is-too-smooth-and-round-for-use-in-construction-concrete-because-thousands-of-years/",
-      "image": "https://spacedaily.com/wp-content/uploads/2026/06/Posts-1600840-2026-06-02T130041.606.png",
-      "source": "Space Daily",
-      "publishedAt": "2026-06-02T16:45:12Z"
-    },
-    {
-      "title": "6-Pair leg elegant Women's Sheer Knee High Stockings (Various) $3.99 ($0.66/pair) + Free Shipping w/ Prime or on $35+ (2 replies)",
-      "description": "Ellen Lee Hosiery via Amazon [amazon.com] has 6-Pair leg elegant Women's Sheer Knee High Stockings (various colors) on sale for $7.99 - 50% off when you apply promo code G4TC6YL5 at checkout = $3",
-      "url": "https://slickdeals.net/f/19587339-6-pair-leg-elegant-women-s-sheer-knee-high-stockings-various-3-99-0-66-pair-free-shipping-w-prime-or-on-35",
-      "image": "https://slickdeals.net/attachment/3/1/7/1/9/9/0/1/450x450/20567184.thumb",
-      "source": "Slickdeals.net",
-      "publishedAt": "2026-06-02T16:45:07Z"
+      "title": "Welcoming the Philippine Government to Have I Been Pwned",
+      "description": "Today, we welcome the 46th government onboarded to Have I Been Pwned’s free gov service: the Philippines.\n\nThe Philippines’ National CERT, working with the Department of Information and Communications Technology, now has access to monitor official government …",
+      "url": "https://www.troyhunt.com/welcoming-the-philippine-government-to-have-i-been-pwned/",
+      "image": "https://storage.ghost.io/c/fb/33/fb3391dc-723d-4e74-b95a-d641b5feb38e/content/images/2026/05/Artboard-1-2.png",
+      "source": "Troyhunt.com",
+      "publishedAt": "2026-06-03T03:40:17Z"
     }
   ]
 }
