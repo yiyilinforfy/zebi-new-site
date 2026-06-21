@@ -1,37 +1,37 @@
 {
-  "updatedAt": "2026-06-20T13:58:45.907Z",
+  "updatedAt": "2026-06-21T04:01:00.850Z",
   "news": [
     {
-      "title": "Tyla, Tierra Whack, Kelela, and All the Songs You Need to Know This Week",
-      "description": "Looking for the week’s best new music? Check out our Songs You Need to Know playlist",
-      "url": "http://www.rollingstone.com/music/music-features/tyla-tierra-whack-kelela-songs-you-need-to-know-1235579968/",
-      "image": "https://www.rollingstone.com/wp-content/uploads/2026/06/Tyla.jpg?w=1600&h=900&crop=1",
-      "source": "Rolling Stone",
-      "publishedAt": "2026-06-19T13:58:17Z"
+      "title": "Home hacks to beat the heat: From pillowcases to plants, all the ways you can turn your house from a sauna into a sanctuary",
+      "description": "With temperatures set to hit the highs more regularly, these affordable tips will keep your interiors feeling fresh - no air-con required, says Nicole Gray",
+      "url": "https://www.dailymail.com/lifestyle/homes/article-15907999/Home-hacks-beat-heat-pillowcases-plants-ways-you-turn-house-sauna-sanctuary.html",
+      "image": "https://i.dailymail.com/1s/2026/06/17/16/109415337-0-image-m-222_1781710507881.jpg",
+      "source": "Dailymail.com",
+      "publishedAt": "2026-06-20T04:00:46Z"
     },
     {
-      "title": "The Congested Sky of an Unequal Country",
-      "description": "Shortly before 9:00 AM on Sunday, June 14, Rio de Janeiro went about its usual routine. Cars puttered along the seaside avenues. Tourists shuffled through the city. The sea held on the horizon like a kind of permanent promise. Above it all, however, was anoth…",
-      "url": "https://www.fairobserver.com/region/latin_america/the-congested-sky-of-an-unequal-country/",
-      "image": "https://www.fairobserver.com/wp-content/uploads/2026/06/pp.jpg",
-      "source": "Fair Observer",
-      "publishedAt": "2026-06-19T13:56:27Z"
+      "title": "Pine64 Pinevoice – A $50 RISC-V Smart Speaker for Home Assistant based on Bouffalo Lab BL606P MCU",
+      "description": "After over two years in the making, Pine64 has now launched the PineVoice (previously PineVox) smart speaker based on the Bouffalo Lab BL606P RISC-V wireless microcontroller with WiFi, Bluetooth, and Zigbee radio interfaces. The device also features two micro…",
+      "url": "https://www.cnx-software.com/2026/06/20/pine64-pinevoice-a-50-risc-v-smart-speaker-for-home-assistant-based-on-bouffalo-lab-bl606p-mcu/",
+      "image": "https://www.cnx-software.com/wp-content/uploads/2026/06/PineVoice-RISC-V-Smart-Speaker.jpg",
+      "source": "CNX Software",
+      "publishedAt": "2026-06-20T04:00:17Z"
     },
     {
-      "title": "gora-chat-history added to PyPI",
-      "description": "Local CLI chat history index for Codex, Claude Code, and Pi.",
-      "url": "https://pypi.org/project/gora-chat-history/",
-      "image": "https://pypi.org/static/images/twitter.abaf4b19.webp",
-      "source": "Pypi.org",
-      "publishedAt": "2026-06-19T13:54:15Z"
+      "title": "Piacenza Group Opens New Milan Office, Expands Global Presence",
+      "description": "Piacenza Group opens new 4,860-sq-ft Milan offices, blending heritage and modernity. The unveiling is set during Men’s Fashion Week.",
+      "url": "http://wwd.com/fashion-news/fashion-features/piacenza-group-new-milan-offices-mens-fashion-week-1239016753/",
+      "image": "https://wwd.com/wp-content/uploads/2026/06/Piacenza-1733-Showroom-Milano-1.png?w=1000&h=563&crop=1",
+      "source": "WWD",
+      "publishedAt": "2026-06-20T04:00:00Z"
     },
     {
-      "title": "10 biggest questions for NBA offseason: Where will Giannis land? How do Spurs rebound? What's next for LeBron?",
-      "description": "Less than a week after the Knicks won the title, we've already moved into free agency and trade mode",
-      "url": "https://www.cbssports.com/nba/news/nba-offseason-questions-giannis-lebron-spurs-jaylen-brown-trae-young-kawhi-leonard/",
-      "image": "https://sportshub.cbsistatic.com/i/r/2026/06/18/b28157bd-fd71-4f4b-a6e1-1c0e42c52f88/thumbnail/1200x675/c4501b7fa5b08d0e2b52010ca172aefb/giannis-getty-1.png",
-      "source": "CBS Sports",
-      "publishedAt": "2026-06-19T13:53:04Z"
+      "title": "Wealth inflation skyrockets",
+      "description": "Many lament how the system is “rigged,” and they’d be correct — it’s rigged in favor of unyielding work, risk taking, and vision.",
+      "url": "https://www.americanthinker.com/blog/2026/06/wealth_inflation_skyrockets.html",
+      "image": "https://images.americanthinker.com/vr/vrip90jasiir7565hqeq_1200.jpg",
+      "source": "Americanthinker.com",
+      "publishedAt": "2026-06-20T04:00:00Z"
     }
   ]
 }
