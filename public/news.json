@@ -1,37 +1,37 @@
 {
-  "updatedAt": "2026-07-22T02:27:52.763Z",
+  "updatedAt": "2026-07-22T13:47:04.496Z",
   "news": [
     {
-      "title": "‘Good art requires space for different ideas’: Jayson Gillham makes an uplifting return to the stage",
-      "description": "Jayson Gillham's touring show with Palestinian-Jordanian pianist Iyad Sughayer is free of bitterness. It's also noticeably absent from media coverage.\nThe post ‘Good art requires space for different ideas’: Jayson Gillham makes an uplifting return to the stag…",
-      "url": "http://www.crikey.com.au/2026/07/21/jayson-gillham-keys-to-life-iyad-sughayer/",
-      "image": "https://assets.crikey.com.au/wp-content/uploads/sites/3/2026/07/gillham.jpg?quality=70&w=1024",
-      "source": "Crikey",
-      "publishedAt": "2026-07-21T02:27:30Z"
+      "title": "US bombs Iranian ports and cities; Tehran retaliates with attacks on US sites in Bahrain, Kuwait and Jordan",
+      "description": "US and Iranian forces exchanged strikes for the tenth consecutive night. Iran-aligned Houthis threatened a naval blockade against Saudi Arabia, impacting global energy supplies. Iran targeted US sites in Bahrain, Kuwait, and Jordan, while a tanker was struck.…",
+      "url": "https://economictimes.indiatimes.com/news/defence/us-bombs-iranian-ports-and-cities-tehran-retaliates-with-attacks-on-us-sites-in-bahrain-kuwait-and-jordan/articleshow/132538145.cms",
+      "image": "https://img.etimg.com/thumb/msid-132538318,width-1200,height-630,imgsize-68874,overlay-etdefence/articleshow.jpg",
+      "source": "The Times of India",
+      "publishedAt": "2026-07-21T13:46:51Z"
     },
     {
-      "title": "A PHP server that can handle 10x as many concurrent requests as Nginx+PHP-fpm",
-      "description": "Pure-PHP Web Server. No NGinX or PHP-FPM needed. Handle 10x more traffic instead! - Qbix/webserver",
-      "url": "https://github.com/Qbix/webserver/blob/main/README.md",
-      "image": "https://opengraph.githubassets.com/0b0cd847c9266653e5f65459b7d7e7c3e7ff313f2d9a858df67cddf549e9af34/Qbix/webserver",
-      "source": "Github.com",
-      "publishedAt": "2026-07-21T02:25:36Z"
+      "title": "Can You Really Game From Anywhere With Starlink? In the Name of Science, I Had to Try",
+      "description": "Live in the middle of nowhere and want to play an MMO? SpaceX's satellite internet is probably your only option. I put it to the test to see if it's fast enough.\nIt's 10 a.m. on a Thursday, and I'm sitting in my home office in rural Idaho, waiting for Metal G…",
+      "url": "https://uk.pcmag.com/networking/144454/can-you-game-from-anywhere-starlink-in-name-of-science-i-had-to-try",
+      "image": "https://sm.pcmag.com/t/pcmag_uk/news/c/can-you-re/can-you-really-game-from-anywhere-with-starlink-in-the-name_vg9w.1200.jpg",
+      "source": "PCMag.com",
+      "publishedAt": "2026-07-21T13:46:00Z"
     },
     {
-      "title": "Here's How To Turn Your Bicycle Into An E-Bike To Beat High Fuel Costs",
-      "description": "With gas hovering just over $4 a gallon, this might be the time to electrify your ride for a cheaper commute - at far less than the cost of a new e-bike.",
-      "url": "https://www.jalopnik.com/2218666/how-to-turn-bicycle-into-ebike-lower-fuel-costs/",
-      "image": "https://www.jalopnik.com/img/gallery/heres-how-to-turn-your-bicycle-into-an-e-bike-to-beat-high-fuel-costs/l-intro-1784560332.jpg",
-      "source": "Jalopnik",
-      "publishedAt": "2026-07-21T02:25:00Z"
+      "title": "TCS-OpenAI deal takes shape; Paytm’s AI bet",
+      "description": "TCS has secured land in Vizag and Pune that could host OpenAI's first data centres in India. This and more in today's ETtech Top 5.",
+      "url": "https://economictimes.indiatimes.com/tech/newsletters/tech-top-5/tcs-openai-deal-takes-shape-paytms-ai-bet/articleshow/132537920.cms",
+      "image": "https://img.etimg.com/thumb/msid-132537920,width-1070,height-580,imgsize-62410,overlay-ettech/editionshow.jpg",
+      "source": "The Times of India",
+      "publishedAt": "2026-07-21T13:45:53Z"
     },
     {
-      "title": "JetBlue wins Spirit Airlines’ coveted slots at LaGuardia Airport in NYC: report",
-      "description": "JetBlue has won Spirit Airlines’ coveted takeoff and landing slots at New York’s LaGuardia Airport – and plans to move into the failed carrier’s old home as airlines fight for space at crowded terminals, according to a report.\nIn a note to staffers Monday, as…",
-      "url": "https://biztoc.com/x/9e07880505374c1b",
-      "image": "https://biztoc.com/cdn/9e07880505374c1b_s.webp",
-      "source": "Biztoc.com",
-      "publishedAt": "2026-07-21T02:24:54Z"
+      "title": "NBA offseason grades for every West team: Clippers have had the best summer... for now",
+      "description": "Most of the NBA's offseason business -- with some notable exceptions -- has been handled, so we're handing out summer grades",
+      "url": "https://www.cbssports.com/nba/news/nba-offseason-grades-western-conference-2026/",
+      "image": "https://sportshub.cbsistatic.com/i/r/2026/07/21/6951df54-db6d-498a-bab3-9a271d4e6fa2/thumbnail/1200x675/7dcd7e3fa5581d91f878b4c4e861cabf/steve-ballmer-getty-1.png",
+      "source": "CBS Sports",
+      "publishedAt": "2026-07-21T13:45:16Z"
     }
   ]
 }
