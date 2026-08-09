@@ -1,37 +1,37 @@
 {
-  "updatedAt": "2026-08-08T12:42:14.234Z",
+  "updatedAt": "2026-08-09T01:27:42.507Z",
   "news": [
     {
-      "title": "Microsoft tosses Teams Live chat into its feature graveyard",
-      "description": "Website support widget lasted 18 months before Redmond ended the conversation",
-      "url": "https://www.theregister.com/applications/2026/08/07/microsoft-tosses-teams-live-chat-into-its-feature-graveyard/5284634",
-      "image": "https://image.theregister.com/259329.jpg?imageId=259329&x=0&y=0&cropw=100&croph=72.07&panox=0&panoy=0&panow=100&panoh=72.07&width=1200&height=683",
-      "source": "Theregister.com",
-      "publishedAt": "2026-08-07T12:39:00Z"
+      "title": "ctc-beam-decoder added to PyPI",
+      "description": "A C++ CTC prefix beam search with KenLM fusion and hotword biasing, reproducing pyctcdecode's behaviour",
+      "url": "https://pypi.org/project/ctc-beam-decoder/",
+      "image": "https://pypi.org/static/images/twitter.abaf4b19.webp",
+      "source": "Pypi.org",
+      "publishedAt": "2026-08-08T01:24:15Z"
     },
     {
-      "title": "Preview to Totality: A Resource Guide to August 12th Total Solar Eclipse",
-      "description": "It’s almost show time. We’re just a few days away now, from the only total solar eclipse of 2026. While eclipses are a surety as the celestial gears of the Universe grind on, there are always a few unknowns leading up to eclipse day. We wrote a recent guide t…",
-      "url": "https://www.universetoday.com/articles/preview-to-totality-a-resource-guide-to-august-12th-total-solar-eclipse",
-      "image": "https://www.universetoday.com/article_images/Eliot_Eclipse_20260804_184646.jpg",
-      "source": "Universe Today",
-      "publishedAt": "2026-08-07T12:39:00Z"
+      "title": "‘Salah will help Onuachu score more goals’",
+      "description": "Former Trabzonspor forward Emre Güral believes Paul Onuachu will score more goals for the club following Mohamed Salah’s arrival, creating more space for t\n\nRead More: https://punchng.com/salah-will-help-onuachu-score-more-goals/",
+      "url": "https://punchng.com/salah-will-help-onuachu-score-more-goals/",
+      "image": "https://punchng.com/wp-content/uploads/2026/08/Salah-and-Onuachu_1786145466-532x630.webp",
+      "source": "The Punch",
+      "publishedAt": "2026-08-08T01:21:27Z"
     },
     {
-      "title": "The moral paradox of extreme wealth: Why people oppose it yet are reluctant to take steps to reduce it",
-      "description": "Extreme inequality is commonplace, so why do people accept it?",
-      "url": "https://theconversation.com/the-moral-paradox-of-extreme-wealth-why-people-oppose-it-yet-are-reluctant-to-take-steps-to-reduce-it-286001",
-      "image": "https://images.theconversation.com/files/752304/original/file-20260805-50-ix5t2u.jpg?ixlib=rb-4.1.1&rect=0%2C177%2C2121%2C1060&q=45&auto=format&w=1356&h=668&fit=crop",
-      "source": "The Conversation Africa",
-      "publishedAt": "2026-08-07T12:37:22Z"
+      "title": "‘KPop Demon Hunters’ Enters Haircare Space With Official Hair Clips, Scrunchies and Bonnet Release",
+      "description": "The hit Netflix film is branching into the product space, with new hair accessories inspired by the fictional girl group (and protagonists of the movie) HUNTR/X.",
+      "url": "http://wwd.com/shop/shop-beauty/best-kpop-demon-hunters-hair-care-accessories-set-clips-buy-1239086143/",
+      "image": "https://wwd.com/wp-content/uploads/2026/07/kpop-demon-hunters-hair-accessories-shop.png?w=900&h=563&crop=1",
+      "source": "WWD",
+      "publishedAt": "2026-08-08T01:17:00Z"
     },
     {
-      "title": "Clean Up With This $500-Off This Roomba 505X Robot Vac and Mop Deal",
-      "description": "This robot cleans all of your floors and it’s a massive 50% off right now.",
-      "url": "https://www.cnet.com/deals/irobot-roomba-plus-505x-combo-deal-2026-08-07/",
-      "image": "https://www.cnet.com/wp-content/uploads/sites/2/iRobot-Roomba-505x-in-black.jpg",
-      "source": "CNET",
-      "publishedAt": "2026-08-07T12:36:43Z"
+      "title": "Football: Scrimmage answers questions for Okeechobee, Master's Academy",
+      "description": "The Okeechobee High School football team scored twice in the second half to secure a 14-10 comeback victory in a scrimmage against Master's Academy.",
+      "url": "https://www.tcpalm.com/story/sports/high-school/football/2026/08/07/treasure-coast-florida-high-school-football-okeechobee-masters-academy-scrimmage-ssaa/91131245007/",
+      "image": "https://s.yimg.com/lo/mysterio/api/89c4a2db4c51d40477366e01cd83b167d208de613ef3246f4a4b14b044a46671/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Ftcpalm-treasure-coast-newspapers%2F10a8de75562cf81027917057c9a97048",
+      "source": "TCPalm",
+      "publishedAt": "2026-08-08T01:11:24Z"
     }
   ]
 }
