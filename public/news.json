@@ -1,37 +1,37 @@
 {
-  "updatedAt": "2026-10-09T04:34:03.344Z",
+  "updatedAt": "2026-10-09T17:57:43.441Z",
   "news": [
     {
-      "title": "Na Hong-Jin Traces ‘The Chaser,’ ‘The Wailing’ and ‘Hope’ to Bar Talk, Shamans and War Fears at Busan Masterclass",
-      "description": "Na Hong-Jin told a Busan International Film Festival masterclass audience that his film “Hope” grew out of a conviction, around 2017, that war was about to break out on the Korean peninsula. At the time, Na said, news reports were describing U.S. fighter jets…",
-      "url": "https://variety.com/2026/film/festivals/na-hong-jin-hope-fear-war-busan-masterclass-1236905247/",
-      "image": "https://variety.com/wp-content/uploads/2026/10/Na-Hong-Jin.jpg?w=1000&h=563&crop=1",
-      "source": "Variety",
-      "publishedAt": "2026-10-08T04:31:04Z"
+      "title": "Fantasy Football Kicker Streamers: The 3 best pickups for Week 5",
+      "description": "An analysis of which waiver wire kickers have the best matchups headed into Week 5.",
+      "url": "https://www.nbcsports.com/fantasy/football/news/fantasy-football-kicker-streamers-the-3-best-pickups-for-week-5",
+      "image": "https://s.yimg.com/lo/mysterio/api/056555c48765456563fe2938a5a18f49c17b72c52ac0cb117120040da92b3461/lightyear_networkapi/resizefill_w1200_h675%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fnbcsports.com%2F4a3fb8fe9cc30d86de814bbeedd15132.jpg",
+      "source": "NBCSports.com",
+      "publishedAt": "2026-10-08T17:57:10Z"
     },
     {
-      "title": "Female rage inspires new adaptation of classic novel Little Women",
-      "description": "As creative and technical arts degrees and school subjects dwindle around the country, Queensland Theatre Company is thinking deeply about how to support the local ecosystem.",
-      "url": "https://www.abc.net.au/news/2026-10-08/little-women-queensland-theatre-company-2027-season-dan-evans/107235680",
-      "image": "https://live-production.wcms.abc-cdn.net.au/fe4141e9362fd94177d540ed8cda1e6e?impolicy=wcms_watermark_news&cropH=1647&cropW=2929&xPos=649&yPos=430&width=862&height=485&imformat=generic",
-      "source": "ABC News (AU)",
-      "publishedAt": "2026-10-08T04:30:33Z"
+      "title": "KAWS Brings CHUM to Absolut with a New Painting and Artist Edition Bottle",
+      "description": "KAWS brings CHUM and his XX motif to a new painting and Absolut Artist Edition bottle, continuing a collaboration history that includes Warhol and Haring.",
+      "url": "https://streetartnews.net/2026/10/kaws-brings-chum-to-absolut-with-a-new-painting-and-artist-edition-bottle.html",
+      "image": "https://streetartnews.net/wp-content/uploads/2026/10/kaws-absolut-1.jpg",
+      "source": "Streetartnews.net",
+      "publishedAt": "2026-10-08T17:57:05Z"
     },
     {
-      "title": "Jim Cramer Draws a Line Between Rocket Lab (RKLB) and SpaceX (SPCX)",
-      "description": "During the October 1 episode of Mad Money, Jim Cramer discussed Rocket Lab Corporation (NASDAQ:RKLB) while reviewing the Nasdaq 100's third-quarter performance. He pointed investors toward Space Exploration Technologies Corp. (NASDAQ:SPCX), better known as Sp…",
-      "url": "https://biztoc.com/x/aa9677268e343243",
-      "image": "https://biztoc.com/cdn/aa9677268e343243_s.webp",
-      "source": "Biztoc.com",
-      "publishedAt": "2026-10-08T04:28:07Z"
+      "title": "Lyapunov spectrum of random neural networks",
+      "description": "The Lyapunov spectrum of a nonlinear recurrent neural network with random asymmetric couplings is calculated in the limit $N\\to\\infty$. The calculation is based on a finite-$N$ identity that expresses the cumulative distribution of Lyapunov exponents as a res…",
+      "url": "https://arxiv.org/abs/2610.12426",
+      "image": "https://arxiv.org/static/browse/0.3.4/images/arxiv-logo-fb.png",
+      "source": "Arxiv.org",
+      "publishedAt": "2026-10-08T17:55:14Z"
     },
     {
-      "title": "Ethereum’s Glamsterdam test runs near 200 million gas per block after upgrade",
-      "description": "The Sepolia rehearsal has raised its processing budget more than threefold, but sampled blocks used less than half that allowance.",
-      "url": "https://www.coindesk.com/tech/2026/10/08/ethereum-s-glamsterdam-test-runs-near-200-million-gas-per-block-after-upgrade",
-      "image": "https://cdn.sanity.io/images/s3y3vcno/production/171f9d8c90ff75747a86c529565ae56a859fcec1-1396x782.png?auto=format&q=75",
-      "source": "CoinDesk",
-      "publishedAt": "2026-10-08T04:23:23Z"
+      "title": "You've Got One More Chance to Grab Lenovo's Best Prime Day Laptop Deals",
+      "description": "Big Deal Days might be over, but discounts are still desperately clinging to life, and we've got highly rated Lenovo laptops at low prices for a few moments more.\nAfter relentlessly reviewing the best discounts and deals from Amazon's Prime Big Deal Days, I f…",
+      "url": "https://uk.pcmag.com/amazon-prime-big-deal-days/167821/youve-got-one-more-chance-to-grab-lenovos-best-prime-day-laptop-deals",
+      "image": "https://sm.pcmag.com/t/pcmag_uk/deal/y/youve-got-/youve-got-one-more-chance-to-grab-lenovos-best-prime-day-lap_dghj.1200.jpg",
+      "source": "PCMag.com",
+      "publishedAt": "2026-10-08T17:54:05Z"
     }
   ]
 }
