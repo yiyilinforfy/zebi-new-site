@@ -1,11 +1,35 @@
 <script setup>
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 import '@/assets/heliomind-brand.css'
 
 const menuOpen = ref(false)
 const isScrolled = ref(false)
+const productMenuOpen = ref(false)
+const mobileProductOpen = ref(false)
 const route = useRoute()
+let productMenuCloseTimer = null
+
+const products = [
+  {
+    to: '/product',
+    name: 'HelioMind OS',
+    description: 'Orbital Design System',
+    badge: null,
+    match: (path) => path === '/product' || path === '/platform',
+  },
+  {
+    to: '/product/jasper',
+    name: 'ZEBI Jasper',
+    description: 'A practical AI assistant for space research',
+    badge: null,
+    match: (path) => path.startsWith('/product/jasper'),
+  },
+]
+
+const isProductActive = computed(() =>
+  products.some((product) => product.match(route.path)),
+)
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
@@ -13,11 +37,59 @@ function toggleMenu() {
 
 function closeMenu() {
   menuOpen.value = false
+  mobileProductOpen.value = false
+}
+
+function openProductMenu() {
+  if (productMenuCloseTimer) {
+    clearTimeout(productMenuCloseTimer)
+    productMenuCloseTimer = null
+  }
+  productMenuOpen.value = true
+}
+
+function closeProductMenu() {
+  if (productMenuCloseTimer) {
+    clearTimeout(productMenuCloseTimer)
+    productMenuCloseTimer = null
+  }
+  productMenuOpen.value = false
+}
+
+function scheduleCloseProductMenu() {
+  if (productMenuCloseTimer) clearTimeout(productMenuCloseTimer)
+  productMenuCloseTimer = setTimeout(() => {
+    productMenuOpen.value = false
+    productMenuCloseTimer = null
+  }, 180)
+}
+
+function toggleProductMenu(event) {
+  event.preventDefault()
+  event.stopPropagation()
+  if (productMenuOpen.value) {
+    closeProductMenu()
+  } else {
+    openProductMenu()
+  }
+}
+
+function toggleMobileProduct() {
+  mobileProductOpen.value = !mobileProductOpen.value
+}
+
+function onDocumentClick(event) {
+  const target = event.target
+  if (!(target instanceof Element)) return
+  if (!target.closest('.nav-product')) {
+    closeProductMenu()
+  }
 }
 
 function onKeydown(event) {
-  if (event.key === 'Escape' && menuOpen.value) {
-    closeMenu()
+  if (event.key === 'Escape') {
+    if (productMenuOpen.value) closeProductMenu()
+    if (menuOpen.value) closeMenu()
   }
 }
 
@@ -29,6 +101,7 @@ watch(
   () => route.path,
   () => {
     closeMenu()
+    closeProductMenu()
   },
 )
 
@@ -39,12 +112,15 @@ watch(menuOpen, (open) => {
 onMounted(() => {
   window.addEventListener('keydown', onKeydown)
   window.addEventListener('scroll', onScroll, { passive: true })
+  document.addEventListener('click', onDocumentClick)
   onScroll()
 })
 
 onUnmounted(() => {
   window.removeEventListener('keydown', onKeydown)
   window.removeEventListener('scroll', onScroll)
+  document.removeEventListener('click', onDocumentClick)
+  if (productMenuCloseTimer) clearTimeout(productMenuCloseTimer)
   document.body.classList.remove('site-nav-open')
 })
 </script>
@@ -63,7 +139,67 @@ onUnmounted(() => {
 
         <nav class="nav-links" aria-label="Primary">
           <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/product">Product</RouterLink>
+
+          <div
+            class="nav-product"
+            :class="{ 'is-open': productMenuOpen, 'is-active': isProductActive }"
+            @mouseenter="openProductMenu"
+            @mouseleave="scheduleCloseProductMenu"
+            @focusin="openProductMenu"
+          >
+            <div class="nav-product-trigger">
+              <RouterLink to="/product" class="nav-product-link">Product</RouterLink>
+              <button
+                type="button"
+                class="nav-product-chevron"
+                data-toggle-only="true"
+                :aria-expanded="productMenuOpen"
+                aria-haspopup="true"
+                aria-controls="nav-product-menu"
+                aria-label="Open product menu"
+                @click="toggleProductMenu"
+              >
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                  <path
+                    d="M1 1L5 5L9 1"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <div
+              id="nav-product-menu"
+              class="nav-product-menu"
+              role="menu"
+              aria-label="Products"
+            >
+              <div class="nav-product-menu-panel">
+                <p class="nav-product-menu-label">Products</p>
+                <div class="nav-product-grid">
+                  <RouterLink
+                    v-for="product in products"
+                    :key="product.to"
+                    :to="product.to"
+                    class="nav-product-card"
+                    :class="{ 'is-current': product.match(route.path) }"
+                    role="menuitem"
+                    @click="closeProductMenu"
+                  >
+                    <span class="nav-product-card-top">
+                      <span class="nav-product-card-name">{{ product.name }}</span>
+                      <span v-if="product.badge" class="nav-product-card-badge">{{ product.badge }}</span>
+                    </span>
+                    <span class="nav-product-card-desc">{{ product.description }}</span>
+                  </RouterLink>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <RouterLink to="/plan">Plan</RouterLink>
           <RouterLink to="/mission">Mission</RouterLink>
           <RouterLink to="/join-us">Join</RouterLink>
@@ -125,7 +261,56 @@ onUnmounted(() => {
 
           <nav class="nav-mobile-links" aria-label="Mobile">
             <RouterLink to="/" @click="closeMenu">Home</RouterLink>
-            <RouterLink to="/product" @click="closeMenu">Product</RouterLink>
+
+            <div class="nav-mobile-product" :class="{ 'is-open': mobileProductOpen }">
+              <div class="nav-mobile-product-row">
+                <RouterLink
+                  to="/product"
+                  class="nav-mobile-product-link"
+                  :class="{ 'is-active': isProductActive }"
+                  @click="closeMenu"
+                >
+                  Product
+                </RouterLink>
+                <button
+                  type="button"
+                  class="nav-mobile-product-toggle"
+                  :aria-expanded="mobileProductOpen"
+                  aria-controls="nav-mobile-product-panel"
+                  aria-label="Toggle product list"
+                  @click="toggleMobileProduct"
+                >
+                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+                    <path
+                      d="M1 1.5L6 6.5L11 1.5"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <div
+                v-show="mobileProductOpen"
+                id="nav-mobile-product-panel"
+                class="nav-mobile-product-panel"
+              >
+                <RouterLink
+                  v-for="product in products"
+                  :key="product.to"
+                  :to="product.to"
+                  class="nav-mobile-product-item"
+                  :class="{ 'is-current': product.match(route.path) }"
+                  @click="closeMenu"
+                >
+                  <span class="nav-mobile-product-item-name">{{ product.name }}</span>
+                  <span class="nav-mobile-product-item-desc">{{ product.description }}</span>
+                </RouterLink>
+              </div>
+            </div>
+
             <RouterLink to="/plan" @click="closeMenu">Plan</RouterLink>
             <RouterLink to="/mission" @click="closeMenu">Mission</RouterLink>
             <RouterLink to="/join-us" @click="closeMenu">Join</RouterLink>

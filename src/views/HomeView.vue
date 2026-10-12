@@ -45,7 +45,7 @@ const designMatrixModules = [
   {
     num: '/ 02',
     title: 'Thermal Digital Twin',
-    subtitle: 'Chip die to deep space vacuum',
+    subtitle: 'From Chip Die to Deep Space',
     description:
       'Grounded in the Stefan-Boltzmann radiation law. Models interface drops across multi-phase cooling loop pipelines in microgravity environments.',
     href: '/product#thermal',
@@ -116,6 +116,10 @@ onMounted(() => {
                 <span>Explore HelioMind</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
+              <button type="button" class="btn-primary" @click="goTo('/product/jasper')">
+                <span>Explore Jasper</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
               <button type="button" class="btn-primary btn-thesis" @click="goTo('/join-us')">
                 <span>Join the team</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -157,7 +161,8 @@ onMounted(() => {
             <ul class="cred-list">
               <li>
                 <strong>A Software Architecture Platform</strong>: We design HelioMind OS, an EDA
-                layer developed for simulating and scaling frontier computational networks.
+                layer for simulating and scaling frontier computational networks, and Zebi Jasper, a
+                compact voice-enabled AI assistant for space research.
               </li>
               <li>
                 <strong>Physics-Grounded Estimators</strong>: Every model in our cockpit is anchored
@@ -214,10 +219,11 @@ onMounted(() => {
           <article class="mv-box">
             <div class="mv-tag">// Our Vision</div>
             <p class="mv-text">
-              To establish <strong>HelioMind OS</strong> as the indispensable, vendor-neutral
-              intelligence layer for interplanetary infrastructure. A world where hyperscalers,
-              sovereign nations, and orbital operators do not guess, but design using the absolute
-              <em>laws of deep-space physics</em>.
+              To establish <strong>HelioMind OS</strong> and <strong>Zebi Jasper</strong> as
+              indispensable layers for space intelligence — vendor-neutral design tooling for orbital
+              infrastructure, and a practical AI assistant for research teams. A world where
+              hyperscalers, sovereign nations, and orbital operators do not guess, but design using the
+              absolute <em>laws of deep-space physics</em>.
             </p>
           </article>
         </div>
@@ -270,7 +276,7 @@ onMounted(() => {
         <div class="reveal">
           <div class="section-eyebrow">Macro-Economic Backdrop</div>
           <h2 class="section-title">
-            The unavoidable physics driving <em>infrastructure offshoring.</em>
+            The Physics Driving Infrastructure into <em>Orbit.</em>
           </h2>
           <p class="home-signal-intro">
             Global cloud consortia and front-line compute labs face equivalent physical constraints:

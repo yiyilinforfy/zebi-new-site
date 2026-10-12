@@ -86,8 +86,8 @@ header {
   top: 0;
   z-index: 100;
   background: rgba(7, 9, 14, 0.85);
-  backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid var(--border);
+  /* backdrop-filter: blur(16px) saturate(180%); */
+  /* border-bottom: 1px solid var(--border); */
   padding: 20px 0;
 }
 
@@ -222,11 +222,11 @@ header {
   background-size:
     cover,
     cover,
-    min(46vw, 760px) auto;
+    auto 100%;
   background-position:
     left top,
     center,
-    94% center;
+    right center;
 }
 
 .platform-hero-copy {
@@ -295,11 +295,11 @@ header {
     background-size:
       cover,
       cover,
-      92vw auto;
+      auto 100%;
     background-position:
       left top,
       center,
-      center 72%;
+      right center;
   }
 }
 
@@ -1932,6 +1932,13 @@ footer {
     0 10px 22px rgba(255, 107, 61, 0.16);
 }
 
+.product-page {
+  --product-body-font: var(--sans);
+  --product-body-size: 16px;
+  --product-body-color: var(--text-2);
+  --product-body-line-height: 1.7;
+}
+
 .platform-knowledge-section {
   margin-top: 100px;
   padding: 100px 0;
@@ -1972,9 +1979,10 @@ footer {
 
 .platform-knowledge-head p {
   max-width: 760px;
-  font-size: 14px;
-  color: var(--text-2);
-  line-height: 1.65;
+  font-family: var(--product-body-font, var(--sans));
+  font-size: var(--product-body-size, 16px);
+  color: var(--product-body-color, var(--text-2));
+  line-height: var(--product-body-line-height, 1.7);
 }
 
 .platform-modules-intro {
@@ -2042,9 +2050,10 @@ footer {
 }
 
 .problem-body {
-  font-size: 14px;
-  color: var(--text-2);
-  line-height: 1.7;
+  font-family: var(--product-body-font, var(--sans));
+  font-size: var(--product-body-size, 16px);
+  color: var(--product-body-color, var(--text-2));
+  line-height: var(--product-body-line-height, 1.7);
 }
 
 /* copied from reference structure */
@@ -2388,9 +2397,10 @@ footer {
 }
 
 .product-showcase-card p {
-  font-size: 13px;
-  color: var(--text-2);
-  line-height: 1.6;
+  font-family: var(--product-body-font, var(--sans));
+  font-size: var(--product-body-size, 16px);
+  color: var(--product-body-color, var(--text-2));
+  line-height: var(--product-body-line-height, 1.7);
 }
 
 .product-landscape-ecosystem {
@@ -2425,9 +2435,10 @@ footer {
 }
 
 .product-ecosystem-card p {
-  font-size: 12px;
-  color: var(--text-2);
-  line-height: 1.6;
+  font-family: var(--product-body-font, var(--sans));
+  font-size: var(--product-body-size, 16px);
+  color: var(--product-body-color, var(--text-2));
+  line-height: var(--product-body-line-height, 1.7);
 }
 
 @media (max-width: 1024px) {
@@ -2438,6 +2449,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .product-page {
+    --product-body-size: 15px;
+  }
+
   .product-landscape-showcase {
     padding: 64px 0;
   }
@@ -2462,9 +2477,9 @@ footer {
   top: calc(var(--site-nav-height, 60px) + 62px);
   z-index: 20;
   background: rgba(7, 9, 14, 0.92);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* border-bottom: 1px solid var(--border); */
+  /* backdrop-filter: blur(12px); */
+  /* -webkit-backdrop-filter: blur(12px); */
 }
 
 .platform-category-nav-inner {
@@ -2836,11 +2851,11 @@ section.module {
     background-size:
       cover,
       cover,
-      100vw auto;
+      auto 100%;
     background-position:
       left top,
       center,
-      center 78%;
+      right center;
   }
 
   .platform-hero h1 {
@@ -2881,8 +2896,8 @@ section.module {
   .platform-knowledge-head p,
   .platform-category-head p,
   .module-description {
-    font-size: 14px;
-    line-height: 1.65;
+    font-size: var(--product-body-size, 15px);
+    line-height: var(--product-body-line-height, 1.7);
   }
 
   .platform-category-band {

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 48" fill="none" role="img" aria-label="ZEBI LAB">
+  <defs>
+    <linearGradient id="zebi-laser-dark" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF6B3D" />
+      <stop offset="100%" stop-color="#FF9B7D" />
+    </linearGradient>
+    <filter id="zebi-glow-dark" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="1.2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="360" height="48" rx="4" fill="#07090E" />
+
+  <g transform="translate(44, 0)">
+    <g transform="translate(0, 4)">
+      <rect x="0" y="0" width="40" height="8" fill="#E8EAF0" opacity="0.9" />
+      <rect x="0" y="32" width="40" height="8" fill="#E8EAF0" opacity="0.9" />
+      <polygon points="0,40 10,40 40,0 30,0" fill="url(#zebi-laser-dark)" filter="url(#zebi-glow-dark)" />
+      <circle cx="40" cy="4" r="5" fill="#00F0FF" filter="url(#zebi-glow-dark)" />
+      <circle cx="0" cy="36" r="5" fill="#00F0FF" filter="url(#zebi-glow-dark)" />
+    </g>
+
+    <g transform="translate(52, 24)">
+      <text
+        x="0"
+        y="-5"
+        fill="#E8EAF0"
+        font-family="JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+        font-size="20"
+        font-weight="600"
+        letter-spacing="2.8"
+      >
+        ZEBI <tspan fill="#FF6B3D">LAB</tspan>
+      </text>
+
+      <text
+        x="0"
+        y="11"
+        fill="#5A6178"
+        font-family="JetBrains Mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+        font-size="9"
+        font-weight="500"
+        letter-spacing="1.98"
+      >
+        AI INFRASTRUCTURE &#183; SPACE
+      </text>
+    </g>
+  </g>
+</svg>

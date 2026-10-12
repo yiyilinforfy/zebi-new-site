@@ -1,0 +1,429 @@
+/* ZEBI Jasper — hero uses product .wrap / platform-hero spacing */
+
+.jasper-page {
+  --jasper-line: rgba(174, 190, 215, 0.16);
+  --jasper-muted: #a3aabb;
+  background: #07090e;
+  color: #e8eaf0;
+  min-height: 100vh;
+}
+
+/* Full-bleed right scene: height fills hero, glued to top + right */
+.jasper-page .jasper-hero.platform-hero {
+  background-size:
+    cover,
+    cover,
+    auto 100%;
+  background-position:
+    left top,
+    center,
+    right top;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding-top: 180px;
+  padding-bottom: 72px;
+}
+
+.jasper-hero-grid {
+  display: block;
+}
+
+.jasper-page .jasper-intro.platform-hero-copy {
+  max-width: 820px;
+}
+
+.jasper-page .jasper-intro h1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+  max-width: none;
+  white-space: normal;
+}
+
+.jasper-page .jasper-intro h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--orange, #ff6b3d);
+}
+
+.jasper-title-sub {
+  font-style: normal;
+  font-weight: 400;
+  color: #e8eaf0;
+}
+
+.jasper-page .jasper-intro p {
+  margin-bottom: 0;
+}
+
+/* Use cases band with solid background */
+.jasper-usecases {
+  background: #0c1018;
+  border-top: 1px solid var(--jasper-line);
+  border-bottom: 1px solid var(--jasper-line);
+  padding: 88px 0;
+}
+
+.jasper-usecases-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(4, minmax(0, 1fr));
+  gap: 40px;
+  align-items: start;
+}
+
+.jasper-usecases-intro h2 {
+  margin: 0 0 12px;
+  font-family: var(--display, 'Fraunces', serif);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.jasper-usecases-intro p {
+  margin: 0;
+  max-width: 260px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--jasper-muted);
+}
+
+.jasper-usecase-media {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: #131825;
+  margin-bottom: 12px;
+}
+
+.jasper-usecase-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.jasper-usecase h4 {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.jasper-usecase p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--jasper-muted);
+}
+
+.jasper-status {
+  border-left: 1px solid var(--jasper-line);
+  padding-left: 24px;
+}
+
+.jasper-status-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.jasper-status-label svg {
+  color: var(--orange, #ff6b3d);
+}
+
+.jasper-status > p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--jasper-muted);
+}
+
+/* Principles — layout/copy from Five Principles redesign, dark theme */
+.jasper-pillars {
+  padding: 120px 0 100px;
+  border-top: 1px solid var(--jasper-line);
+}
+
+.jasper-principles-header {
+  display: grid;
+  grid-template-columns: 1.15fr 0.7fr;
+  gap: 80px;
+  align-items: end;
+  padding-bottom: 72px;
+}
+
+.jasper-principles-eyebrow {
+  margin: 0 0 18px;
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange, #ff6b3d);
+}
+
+.jasper-principles-header h2 {
+  margin: 0;
+  font-family: var(--display, 'Fraunces', serif);
+  font-size: clamp(40px, 5.2vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #f3f5f9;
+}
+
+.jasper-principles-header h2 em {
+  display: block;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--orange, #ff6b3d);
+}
+
+.jasper-principles-intro {
+  margin: 0;
+  max-width: 440px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--jasper-muted);
+}
+
+.jasper-principles {
+  border-top: 1px solid var(--jasper-line);
+}
+
+.jasper-principle {
+  display: grid;
+  grid-template-columns: 64px 1fr 1.35fr;
+  gap: 40px;
+  padding: 52px 0 56px;
+  border-bottom: 1px solid var(--jasper-line);
+  scroll-margin-top: 96px;
+}
+
+.jasper-principle-number {
+  padding-top: 6px;
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #6f788a;
+}
+
+.jasper-principle-label {
+  margin: 0 0 14px;
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6f788a;
+}
+
+.jasper-principle-title h3 {
+  margin: 0;
+  max-width: 390px;
+  font-family: var(--display, 'Fraunces', serif);
+  font-size: clamp(26px, 2.8vw, 38px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: #f3f5f9;
+}
+
+.jasper-principle-title h3 span {
+  display: block;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--orange, #ff6b3d);
+}
+
+.jasper-principle-description {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-self: center;
+}
+
+.jasper-principle-description h4 {
+  margin: 0 0 12px;
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c5ccd8;
+}
+
+.jasper-principle-direction h4 {
+  color: var(--cyan, #6ec9d9);
+}
+
+.jasper-principle-description p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.72;
+  color: var(--jasper-muted);
+}
+
+.jasper-ending {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  padding-top: 96px;
+  align-items: start;
+}
+
+.jasper-ending h2 {
+  margin: 0;
+  max-width: 620px;
+  font-family: var(--display, 'Fraunces', serif);
+  font-size: clamp(34px, 4.2vw, 56px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: #f3f5f9;
+}
+
+.jasper-ending h2 em {
+  display: block;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--orange, #ff6b3d);
+}
+
+.jasper-ending-copy {
+  max-width: 470px;
+}
+
+.jasper-ending-copy > p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--jasper-muted);
+}
+
+.jasper-ending-copy strong {
+  display: block;
+  margin-top: 28px;
+  color: #f3f5f9;
+  font-size: 20px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  font-family: var(--display, 'Fraunces', serif);
+}
+
+.jasper-join-btn {
+  margin-top: 32px;
+}
+
+.jasper-status-foot-wrap {
+  border-top: 1px solid var(--jasper-line);
+  background: #07090e;
+  padding: 28px 0 40px;
+}
+
+.jasper-status-foot {
+  margin: 0;
+  max-width: 820px;
+  font-family: var(--sans, 'Inter Tight', -apple-system, sans-serif);
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #8a95a5;
+}
+
+@media (max-width: 1100px) {
+  .jasper-usecases-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+
+  .jasper-usecases-intro {
+    grid-column: 1 / -1;
+  }
+
+  .jasper-principles-header {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-bottom: 48px;
+  }
+
+  .jasper-principle {
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+  }
+
+  .jasper-principle-description {
+    grid-column: 2;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 8px;
+  }
+
+  .jasper-ending {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 64px;
+  }
+}
+
+@media (max-width: 768px) {
+  .jasper-page .jasper-hero.platform-hero {
+    min-height: auto;
+    padding-top: 116px;
+    padding-bottom: 40px;
+    background-size:
+      cover,
+      cover,
+      auto 100%;
+    background-position:
+      left top,
+      center,
+      right top;
+  }
+
+  .jasper-usecases {
+    padding: 64px 0;
+  }
+
+  .jasper-usecases-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .jasper-pillars {
+    padding: 72px 0 64px;
+  }
+
+  .jasper-principle {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 40px 0;
+  }
+
+  .jasper-principle-description {
+    grid-column: auto;
+  }
+
+  .jasper-principle-number {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .jasper-usecases-grid {
+    grid-template-columns: 1fr;
+  }
+}

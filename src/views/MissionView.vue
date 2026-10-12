@@ -107,12 +107,21 @@ function goTo(path) {
           reference architectures.
         </p>
         <p class="mission-copy">
+          Zebi Jasper — a compact, voice-enabled AI assistant for space research, built around local
+          control, open technology, and keeping people in charge.
+        </p>
+        <p class="mission-copy">
           Used by AI labs, satellite operators, and sovereign programs to make billion-dollar decisions
           with confidence instead of faith.
         </p>
-        <button type="button" class="btn-primary mission-product-btn" @click="goTo('/product')">
-          Explore HelioMind →
-        </button>
+        <div class="mission-product-actions">
+          <button type="button" class="btn-primary mission-product-btn" @click="goTo('/product')">
+            Explore HelioMind →
+          </button>
+          <button type="button" class="btn-primary mission-product-btn" @click="goTo('/product/jasper')">
+            Explore Jasper →
+          </button>
+        </div>
       </div>
     </section>
 
@@ -231,8 +240,15 @@ function goTo(path) {
   line-height: 1.7;
 }
 
-.mission-product-btn {
+.mission-product-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-top: 16px;
+}
+
+.mission-product-btn {
+  margin-top: 0;
 }
 
 .mission-ask {

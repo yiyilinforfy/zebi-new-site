@@ -3,15 +3,39 @@ import { useRouter } from 'vue-router'
 import SiteHeader from '@/components/SiteHeader.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
 import '@/assets/heliomind-platform.css'
-import { onMounted, onUnmounted, nextTick, ref } from 'vue'
+import { onMounted, onUnmounted, nextTick, ref, computed } from 'vue'
 import { initPlatformPage } from '@/scripts/platform-page.js'
 import productHeroImage from '@/assets/images/product.jpg'
+import validationSweepImage from '@/assets/images/zebi_v02_recode.png'
+import zebiSimImage from '@/assets/images/zebi-sium.png'
+import { ElImage } from 'element-plus'
+import 'element-plus/es/components/image/style/css'
+import 'element-plus/es/components/image-viewer/style/css'
 
 const router = useRouter()
 const categoryIds = ['economics', 'physics', 'orchestration']
-const quickJumpIds = ['thesis', 'architecture', 'unit-cell', 'modules', 'landscape']
+const tocItems = [
+  { id: 'thesis', label: 'Thesis', num: '01' },
+  { id: 'validation', label: 'Validation', num: '02' },
+  { id: 'position', label: 'Position', num: '03' },
+  { id: 'findings', label: 'Findings', num: '04' },
+  { id: 'architecture', label: 'Architecture', num: '05' },
+  { id: 'unit-cell', label: 'Unit Cell', num: '06' },
+  { id: 'modules', label: 'Modules', num: '07' },
+  { id: 'landscape', label: 'Landscape', num: '08' },
+]
+const quickJumpIds = tocItems.map((item) => item.id)
 const activeModuleId = ref(null)
-const isQuickJumpStuck = ref(false)
+const activeTocId = ref('thesis')
+const isPageScrolled = ref(false)
+const isTocOpen = ref(true)
+const scrollRevealThreshold = 12
+const showTocPanel = computed(() => isPageScrolled.value && isTocOpen.value)
+const showTocToggle = computed(() => isPageScrolled.value && !isTocOpen.value)
+
+function toggleToc(open) {
+  isTocOpen.value = open
+}
 
 function goTo(path) {
   router.push(path)
@@ -107,14 +131,21 @@ function updateActiveCategoryTab() {
   })
 }
 
-function updateActiveQuickJumpTab() {
-  const links = document.querySelectorAll('.platform-quick-jump-links a')
-  if (!links.length) return
+function scrollToSection(event, sectionId) {
+  event.preventDefault()
+  const section = document.getElementById(sectionId)
+  if (!section) return
 
   const headerHeight = document.querySelector('header')?.getBoundingClientRect().height || 0
-  const quickJumpHeight =
-    document.querySelector('.platform-quick-jump')?.getBoundingClientRect().height || 0
-  const offset = headerHeight + quickJumpHeight + 28
+  const top = window.scrollY + section.getBoundingClientRect().top - headerHeight - 24
+  window.scrollTo({ top, behavior: 'smooth' })
+}
+
+function updateActiveToc() {
+  if (!isPageScrolled.value) return
+
+  const headerHeight = document.querySelector('header')?.getBoundingClientRect().height || 0
+  const offset = headerHeight + 80
 
   let activeId = quickJumpIds[0]
   for (const id of quickJumpIds) {
@@ -124,19 +155,13 @@ function updateActiveQuickJumpTab() {
     if (top - offset <= 0) activeId = id
   }
 
-  links.forEach((link) => {
-    const href = link.getAttribute('href') || ''
-    link.classList.toggle('is-active', href === `#${activeId}`)
-  })
+  activeTocId.value = activeId
 }
 
-function updateQuickJumpStickyState() {
-  const quickJump = document.querySelector('.platform-quick-jump')
-  if (!quickJump) return
-
-  const headerHeight = document.querySelector('header')?.getBoundingClientRect().height || 0
-  const top = quickJump.getBoundingClientRect().top
-  isQuickJumpStuck.value = top <= headerHeight + 1
+function onPageScroll() {
+  isPageScrolled.value = window.scrollY > scrollRevealThreshold
+  updateActiveCategoryTab()
+  updateActiveToc()
 }
 
 const loadChart = () =>
@@ -160,26 +185,18 @@ const loadChart = () =>
 onMounted(async () => {
   await loadChart()
   initPlatformPage()
-  updateActiveCategoryTab()
-  updateActiveQuickJumpTab()
-  updateQuickJumpStickyState()
-  window.addEventListener('scroll', updateActiveCategoryTab, { passive: true })
-  window.addEventListener('scroll', updateActiveQuickJumpTab, { passive: true })
-  window.addEventListener('scroll', updateQuickJumpStickyState, { passive: true })
-  window.addEventListener('resize', updateQuickJumpStickyState)
+  onPageScroll()
+  window.addEventListener('scroll', onPageScroll, { passive: true })
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', updateActiveCategoryTab)
-  window.removeEventListener('scroll', updateActiveQuickJumpTab)
-  window.removeEventListener('scroll', updateQuickJumpStickyState)
-  window.removeEventListener('resize', updateQuickJumpStickyState)
+  window.removeEventListener('scroll', onPageScroll)
 })
 </script>
 
 <template>
   <SiteHeader />
-  <main>
+  <main class="product-page">
 <section
   class="platform-hero"
   :style="{
@@ -192,25 +209,60 @@ onUnmounted(() => {
       <h1><em>HelioMind OS</em> · Orbital Design System</h1>
       <h3 class="hero-kicker">Design the orbital AI stack with 11 connected engines.</h3>
       <p style="margin-bottom: 10px;">
-        Start with the five core sections on this page - Architecture, Unit Cell, Modules, and
-        Landscape. Follow the flow to understand how HelioMind OS is built, what it can do, and
-        why it matters.
+        Follow the page flow — Thesis, Validation, Position, Findings, Architecture, Unit Cell,
+        Modules, Landscape — to understand how HelioMind OS is built, what it can do, and why it
+        matters.
       </p>
     </div>
   </div>
 </section>
 
-<section class="platform-quick-jump" :class="{ 'is-stuck': isQuickJumpStuck }">
-  <div class="wrap">
-    <div class="platform-quick-jump-links">
-      <a href="#thesis"><span class="jump-num">01</span><span>Thesis</span></a>
-      <a href="#architecture"><span class="jump-num">02</span><span>Architecture</span></a>
-      <a href="#unit-cell"><span class="jump-num">03</span><span>Unit Cell</span></a>
-      <a href="#modules"><span class="jump-num">04</span><span>Modules</span></a>
-      <a href="#landscape"><span class="jump-num">05</span><span>Landscape</span></a>
-    </div>
+<aside
+  class="product-page-toc"
+  :class="{ 'is-visible': showTocPanel }"
+  :aria-hidden="!showTocPanel"
+  aria-label="Table of contents"
+>
+  <div class="product-page-toc__head">
+    <div class="product-page-toc__label">Table of contents</div>
+    <button
+      type="button"
+      class="product-page-toc__close"
+      aria-label="Hide table of contents"
+      @click="toggleToc(false)"
+    >
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M8 3L4 7L8 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
   </div>
-</section>
+  <nav class="product-page-toc__nav">
+    <a
+      v-for="item in tocItems"
+      :key="item.id"
+      :href="`#${item.id}`"
+      class="product-page-toc__link"
+      :class="{ 'is-active': activeTocId === item.id }"
+      @click="scrollToSection($event, item.id)"
+    >
+      <span class="product-page-toc__num">{{ item.num }}</span>
+      <span class="product-page-toc__text">{{ item.label }}</span>
+    </a>
+  </nav>
+</aside>
+
+<button
+  type="button"
+  class="product-page-toc-toggle"
+  :class="{ 'is-visible': showTocToggle }"
+  :aria-hidden="!showTocToggle"
+  aria-label="Show page navigation"
+  @click="toggleToc(true)"
+>
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+    <path d="M3 5H15M3 9H15M3 13H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+  </svg>
+</button>
 
 <section id="thesis" class="platform-thesis-section">
   <div class="wrap">
@@ -254,6 +306,234 @@ onUnmounted(() => {
           Chip design has Cadence and Synopsys, each $50B+ companies. AI infrastructure design has
           nothing. The empty seat at the most expensive table in technology.
         </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="validation" class="platform-knowledge-section product-validation-section">
+  <div class="wrap">
+    <div class="platform-knowledge-head product-validation-head">
+      <div class="platform-knowledge-eyebrow">Validation</div>
+      <h2>The most valuable company on Earth just <em>proved our thesis</em>.</h2>
+    </div>
+
+    <div class="product-validation-grid">
+      <div>
+        <div class="product-validation-quote">
+          The key constraint on AI's continued growth is physical — chip manufacturing, data-center infrastructure, and power generation. <em>The future of AI will be determined by control of the physical stack.</em>
+        </div>
+        <div class="product-validation-attribution">
+          SpaceX · IPO prospectus, filed with the SEC · May 2026
+        </div>
+      </div>
+
+      <div class="product-validation-readout">
+        <div class="product-validation-readout-title">What the S-1 confirms for HelioMind</div>
+        <div class="product-validation-stat-row">
+          <div class="product-validation-stat-label">SpaceX IPO valuation — the scale of the bet on physical AI infrastructure</div>
+          <div class="product-validation-stat-value"><em>$1.75T</em></div>
+        </div>
+        <div class="product-validation-stat-row">
+          <div class="product-validation-stat-label">Orbit SpaceX chose for AI compute satellites — identical to our architecture</div>
+          <div class="product-validation-stat-value">SSO</div>
+        </div>
+        <div class="product-validation-stat-row">
+          <div class="product-validation-stat-label">First orbital AI compute deployment — the decision window opens now</div>
+          <div class="product-validation-stat-value"><em>2028</em></div>
+        </div>
+        <div class="product-validation-stat-row">
+          <div class="product-validation-stat-label">US electricity generation CAGR over 15 years, against exploding compute demand</div>
+          <div class="product-validation-stat-value"><em>0.1%</em></div>
+        </div>
+        <div class="product-validation-takeaway">
+          SpaceX builds a <strong>closed, vertically integrated stack</strong> for its own workloads. It will never be the neutral platform that helps everyone else design theirs.
+        </div>
+      </div>
+    </div>
+
+    <div class="product-contradiction">
+      <div class="product-contradiction-header">The same company. Two different statements. Eighteen weeks apart.</div>
+      <div class="product-contradiction-cols">
+        <div class="product-contradiction-col">
+          <div class="product-contradiction-label stage">On stage · Davos · January 2026</div>
+          <div class="product-contradiction-text">
+            Orbital AI is a <em>"no-brainer"</em> — achievable in two to three years. Cooling is solved by pointing a radiator away from the sun. More AI compute will be in orbit than on Earth within five years.
+          </div>
+          <div class="product-contradiction-source">— public remarks, World Economic Forum</div>
+        </div>
+        <div class="product-contradiction-col">
+          <div class="product-contradiction-label filing">Under oath · SEC S-1 · May 2026</div>
+          <div class="product-contradiction-text">
+            Orbital data centers involve <em>"significant technical complexity and unproven technologies, and may not achieve commercial viability."</em>
+          </div>
+          <div class="product-contradiction-source">— IPO prospectus, filed with the SEC under legal liability</div>
+        </div>
+      </div>
+      <div class="product-contradiction-resolve">
+        <strong>This gap is the business.</strong> The whole industry is about to commit hundreds of billions on the strength of keynote promises — while the legal filings quietly admit the physics and economics are unproven. Someone has to be the rigorous, vendor-neutral layer that models the real numbers and tells builders the truth. That is HelioMind.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="position" class="platform-knowledge-section alt product-position-section">
+  <div class="wrap">
+    <div class="platform-knowledge-head">
+      <div class="platform-knowledge-eyebrow">The position</div>
+      <h2 class="product-position-statement">
+        In the new space race led by SpaceX, HelioMind is not another competitor on the battlefield. We provide the intelligence platform that helps every participant navigate it.
+      </h2>
+    </div>
+
+    <div class="product-position-cols">
+      <div class="product-position-col">
+        <div class="product-position-col-tag">The hyperscalers</div>
+        <div class="product-position-col-title">Azure, AWS, GCP</div>
+        <p class="product-position-col-body">
+          SpaceX intends to undercut terrestrial data centers with free orbital solar power. Every cloud provider now needs to model a <strong>hybrid-orbit defense</strong> —— with the help of The Infrastructure Architect.
+        </p>
+      </div>
+      <div class="product-position-col">
+        <div class="product-position-col-tag">The sovereigns</div>
+        <div class="product-position-col-title">Gulf &amp; European programs</div>
+        <p class="product-position-col-body">
+          As dependence on U.S.-controlled compute becomes a strategic vulnerability, sovereign wealth funds are seeking alternatives. Before committing tens of billions, they must be able to model, simulate, and design sovereign orbital compute networks on their own terms.
+        </p>
+      </div>
+      <div class="product-position-col">
+        <div class="product-position-col-tag">The orbital builders</div>
+        <div class="product-position-col-title">ADA Space, Starcloud, Astro-Future</div>
+        <p class="product-position-col-body">
+          Real operators with hardware already in orbit, now facing a $1.75T competitor. To keep pace they must optimize thermal design and MoE routing at the frontier — exactly what the <strong>Thermal Twin and MoE Designer</strong> exist to do.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="findings" class="platform-knowledge-section product-findings-section">
+  <div class="wrap">
+    <div class="platform-knowledge-head">
+      <div class="platform-knowledge-eyebrow">Validated findings</div>
+      <h2>We tested our own thesis. <em>Here is what the physics said.</em></h2>
+    </div>
+
+    <div class="product-findings-body">
+      <div class="product-findings-block">
+        <p>
+          We tested the obvious thesis — that intelligent expert placement resolves the bandwidth-vs-thermal conflict in orbital MoE serving. Our absolute-physics validation (9,000 scenarios plus an analytical boundary decomposition) showed it does not: once radiators are sized to balanced load, thermally-balanced placement is already near-optimal, and sophisticated optimization adds a median of <strong>0.0%</strong>. We publish this as design guidance — measure your router imbalance; choose your radiator-sizing policy deliberately; co-design capacity slack with thermal headroom; deploy a simple, auditable balanced-placement policy as the flight rule; and don't buy placement software you don't need. Zebi sells validated answers, including "you don't need an optimizer here." Published study:
+          <a class="product-findings-citation" href="https://doi.org/10.5281/zenodo.20635834" target="_blank" rel="noopener">Zhang (2026), doi:10.5281/zenodo.20635834</a>.
+        </p>
+      </div>
+
+      <div class="product-findings-block">
+        <h3 class="product-findings-subtitle">Zebi-Q — the active frontier: thermal-adaptive precision</h3>
+        <p>
+          Placement redistributes a fixed heat total — our validation closed that lever. Quantization shrinks the total — a different physics handle, and the one that moves the needle. Evidence status, labeled exactly:
+        </p>
+        <ul class="product-findings-list">
+          <li class="product-findings-evidence product-findings-evidence--established"><strong>ESTABLISHED:</strong> in the thermally binding regime, thermal structure dominates placement; balanced placement is near-optimal (our 2026 validation study).</li>
+          <li class="product-findings-evidence product-findings-evidence--modeled"><strong>MODELED</strong> (Phase 1, pre-registered analytical gate, passed): with conservative system-level INT8 energy factors (~1.5×, derived from published per-operation data — Horowitz, ISSCC 2014 — not measured), 40% of placement-unfixable thermal configurations become feasible; median precision duty cycle ≈ 0.55.</li>
+          <li class="product-findings-evidence product-findings-evidence--measured"><strong>MEASURED</strong> (Phases 2a–2b, complete): INT8 quantization costs <strong>+0.01%</strong> perplexity at full corpus on both a 30B-class MoE (Qwen3-30B-A3B — the DynaExq benchmark family) and OLMoE-1B-7B — accuracy-free across a 30× scale range. Measured decode energy on Grace-Blackwell silicon: 16-bit→INT8 <strong>1.58×</strong>, inside the modeled band — the feasibility gate stands on measured ground, flipping 48.9% of placement-unfixable configurations. Measured 16-bit→INT4-as-deployed: only 1.77× at +2.6–3.0% perplexity — far below modeled INT4 optimism in memory-bound decode. Honest consequences: the INT8 plateau is where the value is, and the hardest ~9% of thermal configurations are radiator-sizing problems no precision software closes.</li>
+          <li class="product-findings-evidence product-findings-evidence--next"><strong>DEMONSTRATED</strong> (Phase 3, closed-loop controller, complete): a controller that reads a modeled time-varying orbital radiator envelope and a measured serving-power signal, and selects expert precision in real time, holds dissipation under capacity with <strong>zero sustained violations</strong> across two full 90-minute orbits — exactly where a static full-precision policy violates the envelope in the sunlit binding phase. With INT8 the rescue is accuracy-free; with INT4 the controller meters a real and honestly-reported quality cost, but only when the binding envelope leaves no choice. We also report a target the controller did not meet, rather than tuning it away: it held full precision for roughly 10% of each orbit against a planned 35%, because its measured-power safety backstop proved more conservative than the open-loop design arithmetic — by a factor of about 3.5, and in the safe direction. That a measured controller is more cautious than the design math predicted is itself the most transferable finding of the study.</li>
+          <li class="product-findings-evidence product-findings-evidence--next"><strong>NEXT:</strong> per-expert rather than process-level precision switching, an online workload-skew estimator in place of a fixed configuration label, and validation beyond a single desktop device class.</li>
+        </ul>
+        <p>
+          Positioned honestly against prior art: SpaceMoE (HKU/Xidian, 2026) names thermal-budget-adaptive expert quantization an open problem; DynaExq (2025) demonstrates dynamic expert-level precision allocation under <em>memory</em> budgets. Our delta is the <em>time-varying orbital thermal</em> budget and the duty-cycle feasibility mathematics. Published studies: the <a class="product-findings-citation" href="https://doi.org/10.5281/zenodo.20635950" target="_blank" rel="noopener">thermal-adaptive precision study (Zhang, 2026)</a> and the <a class="product-findings-citation" href="https://doi.org/10.5281/zenodo.20713300" target="_blank" rel="noopener">closed-loop controller demonstration (Zhang, 2026)</a>.
+        </p>
+        <p>
+          One further result reshapes how the lever should be applied. When we replaced the synthetic routing priors of the analytical work with routing traces measured from a real Mixture-of-Experts model, thermal feasibility turned out to be strongly workload-dependent. Per-layer routing skew is roughly 2.8 for natural-language serving but rises to roughly 7.4 for code, which makes a code-heavy serving mix about twice as hard thermally and in need of proportionally more radiator margin. English prose is the benign outlier; code, mathematics, and low-resource multilingual workloads all cluster at the hard end. Workload mix is therefore a first-order radiator-sizing variable, not a second-order detail — and a sparser, frontier-scale MoE sits closer to the radiator-bound end across every workload than our headline figures alone would suggest. Published study: <a class="product-findings-citation" href="https://doi.org/10.5281/zenodo.20651168" target="_blank" rel="noopener">Zhang (2026), doi:10.5281/zenodo.20651168</a>.
+        </p>
+      </div>
+
+      <div class="product-findings-block">
+        <h3 class="product-findings-subtitle">How we work</h3>
+        <p>
+          Our research process is built around falsification, not confirmation. Every claim is subjected to a pre-registered truth gate with the explicit goal of proving it wrong. Negative findings are reported, not buried. Simulations are labeled as simulations, measurements as measurements, and no performance threshold is revised after the data is observed. <br><br> Four studies have been released as open-access preprints:
+        </p>
+        <ul class="product-findings-preprint-list">
+          <li class="product-findings-preprint-item">
+            <a class="product-findings-citation product-findings-citation--block" href="https://doi.org/10.5281/zenodo.20635834" target="_blank" rel="noopener">
+              <span class="product-findings-paper-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none">
+                  <path d="M4 1.75H9.5L12.75 5V14.25H4V1.75Z" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M9.5 1.75V5H12.75" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M6 7.25H10.75M6 9.25H10.75M6 11.25H9.25" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+                </svg>
+              </span>
+              Placement Negative Result
+            </a>
+          </li>
+          <li class="product-findings-preprint-item">
+            <a class="product-findings-citation product-findings-citation--block" href="https://doi.org/10.5281/zenodo.20635950" target="_blank" rel="noopener">
+              <span class="product-findings-paper-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none">
+                  <path d="M4 1.75H9.5L12.75 5V14.25H4V1.75Z" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M9.5 1.75V5H12.75" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M6 7.25H10.75M6 9.25H10.75M6 11.25H9.25" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+                </svg>
+              </span>
+              Thermal-Adaptive Precision Study
+            </a>
+          </li>
+          <li class="product-findings-preprint-item">
+            <a class="product-findings-citation product-findings-citation--block" href="https://doi.org/10.5281/zenodo.20651168" target="_blank" rel="noopener">
+              <span class="product-findings-paper-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none">
+                  <path d="M4 1.75H9.5L12.75 5V14.25H4V1.75Z" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M9.5 1.75V5H12.75" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M6 7.25H10.75M6 9.25H10.75M6 11.25H9.25" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+                </svg>
+              </span>
+              Measured-Routing and Domain-Dependence Study
+            </a>
+          </li>
+          <li class="product-findings-preprint-item">
+            <a class="product-findings-citation product-findings-citation--block" href="https://doi.org/10.5281/zenodo.20713300" target="_blank" rel="noopener">
+              <span class="product-findings-paper-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none">
+                  <path d="M4 1.75H9.5L12.75 5V14.25H4V1.75Z" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M9.5 1.75V5H12.75" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M6 7.25H10.75M6 9.25H10.75M6 11.25H9.25" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+                </svg>
+              </span>
+              Closed-Loop Controller Demonstration
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Zebi-Sim: the studies, made runnable -->
+      <div class="product-findings-block product-findings-block--sim">
+        <h3 class="product-findings-subtitle">
+          Zebi-Sim <span class="product-findings-sim-subtitle">—— From research papers to orbital decisions.</span>
+        </h3>
+        <p>
+          The four studies above established the thermal, power, and inference foundations for
+          running AI in space. Zebi-Sim brings those findings together into a single simulator: enter
+          a satellite configuration and AI workload, and it determines whether the model can operate
+          within its available power and thermal budget. When full-precision inference is not viable,
+          it recommends quantized deployment paths such as INT8 and INT4 that remain operational in
+          orbit.
+        </p>
+        <p>
+          Every assumption is visible. Every result is traceable. Every number is linked to
+          <em>measured data, derived values, modeled estimates, or stated assumptions</em>.
+        </p>
+        <div class="product-findings-sim-figure">
+          <ElImage
+            class="product-findings-sim-image"
+            :src="zebiSimImage"
+            :preview-src-list="[zebiSimImage]"
+            :initial-index="0"
+            preview-teleported
+            alt="Zebi-Sim — orbital MoE feasibility engine"
+          />
+          <div class="product-findings-sim-caption">
+            Fig — Zebi-Sim, the orbital MoE feasibility engine. Click to enlarge.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1338,11 +1618,11 @@ onUnmounted(() => {
         <div class="module-summary-id">/ 04</div>
         <div>
           <h3 class="module-summary-title">Orbital MoE Designer</h3>
-          <p class="module-summary-desc">Place expert layers across satellite types.</p>
+          <p class="module-summary-desc">Expert-to-satellite topology under hard radiator physics.</p>
         </div>
       </div>
       <div class="module-summary-side">
-        <div class="module-summary-preview">8/64 experts active</div>
+        <div class="module-summary-preview">Validated · see findings</div>
         <div class="module-summary-toggle">{{ activeModuleId === 'moe' ? 'Collapse' : 'Expand' }}</div>
       </div>
       <div class="module-summary-arrow" :class="{ 'is-open': activeModuleId === 'moe' }">⌄</div>
@@ -1350,13 +1630,11 @@ onUnmounted(() => {
     <div id="module-panel-moe" class="module-collapse" :class="{ 'is-open': activeModuleId === 'moe' }">
       <div class="module-header">
         <div>
-          <div class="module-meta">/ 04 · Orbital MoE Designer · NEW</div>
+          <div class="module-meta">/ 04 · Orbital MoE Designer · Validated</div>
           <div class="module-title">Expert-to-satellite <em>topology</em>.</div>
         </div>
         <div class="module-description">
-          Place Mixture-of-Experts model layers across satellite types with optimal
-          expert-to-satellite topology. Patent-pending. Not every expert belongs on every
-          satellite.
+          For any sparse model — Mixtral, Qwen3-MoE, DeepSeek-V3, GPT-OSS — maps expert-to-satellite topology under hard radiator physics. Our own 9,000-scenario validation showed thermally-balanced placement is already near-optimal — so this module ships that answer as design guidance, including when you don't need placement software at all.
         </div>
       </div>
 
@@ -1818,12 +2096,12 @@ onUnmounted(() => {
             <td>HK IPO ¥11.5B</td>
           </tr>
           <tr>
-            <td class="name">SpaceX (AI Sat Mini)</td>
-            <td class="geo">US · Hawthorne</td>
-            <td><span class="tag planning">FCC filed</span></td>
-            <td>1M sats, D3 chip, Terafab integration</td>
-            <td>1 TW/year</td>
-            <td>IPO 2026 ~$1.75T</td>
+            <td class="name">SpaceX</td>
+            <td class="geo">US · Starbase TX</td>
+            <td><span class="tag planning">IPO S-1 filed</span></td>
+            <td>Orbital AI compute in SSO from 2028. Terafab chip program with Tesla + Intel.</td>
+            <td>IPO at ~$1.75T</td>
+            <td>Closed vertical stack — a non-customer, not a competitor</td>
           </tr>
           <tr>
             <td class="name">Google (Suncatcher)</td>
@@ -1949,7 +2227,7 @@ onUnmounted(() => {
 
     <div class="compet-grid">
       <div class="compet-card"><div class="compet-name">ADA Space</div><div class="compet-region">China · Chengdu</div><div class="compet-status live">12 sats operational</div><p class="compet-bet">3,156-sat ITU. Three-Body Constellation. Hong Kong IPO May 2026 at ¥11.5B valuation.</p></div>
-      <div class="compet-card"><div class="compet-name">SpaceX</div><div class="compet-region">USA · Hawthorne</div><div class="compet-status planning">FCC filed</div><p class="compet-bet">1M satellites. D3 space-hardened chip. Terafab joint venture for 1 TW/year.</p></div>
+      <div class="compet-card"><div class="compet-name">SpaceX</div><div class="compet-region">USA · Starbase TX</div><div class="compet-status planning">IPO S-1 filed</div><p class="compet-bet">Orbital AI compute in SSO from 2028. Terafab chip program with Tesla + Intel. IPO at ~$1.75T. Closed vertical stack — a non-customer, not a competitor.</p></div>
       <div class="compet-card"><div class="compet-name">Google Suncatcher</div><div class="compet-region">USA · Mountain View</div><div class="compet-status research">Demo 2027</div><p class="compet-bet">81-sat cluster, Trillium TPU, formation flight. Two prototypes launching 2027.</p></div>
       <div class="compet-card"><div class="compet-name">Starcloud</div><div class="compet-region">USA · Mountain View</div><div class="compet-status live">H100 in orbit</div><p class="compet-bet">5 GW long-term vision. Backed by Y Combinator, $1.1B unicorn.</p></div>
       <div class="compet-card"><div class="compet-name">Blue Origin TeraWave</div><div class="compet-region">USA · Kent</div><div class="compet-status planning">Q4 2027 launch</div><p class="compet-bet">5,408 LEO + 128 MEO. 6 Tbps optical. The downlink backbone everyone needs.</p></div>
@@ -1995,6 +2273,58 @@ onUnmounted(() => {
           cycles for rapid chip refresh.
         </p>
       </button>
+    </div>
+  </div>
+</section>
+
+<section id="engineering-log" class="wrap engineering-log">
+  <div class="section-header engineering-log__header">
+    <div class="hero-eyebrow engineering-log__eyebrow">
+      Zebi Lab // Empirical Validation
+    </div>
+    <h2 class="section-title engineering-log__title">
+      From 45,000 orbital stress tests to <em><span class="engineering-version-highlight">HelioMind v0.3</span>.</em>
+    </h2>
+    <p class="engineering-log__lead">
+      Reliable space software cannot rely on ideal theoretical models. We stress-tested our routing algorithms across 45,000 extreme orbital scenarios—and used that failure data to engineer thermal-aware routing in <span class="engineering-version-highlight">HelioMind v0.3</span>.
+    </p>
+  </div>
+
+  <div class="engineering-log__panel">
+    <div class="engineering-log__grid">
+      <div class="engineering-log__figure">
+        <ElImage
+          class="engineering-log__image"
+          :src="validationSweepImage"
+          :preview-src-list="[validationSweepImage]"
+          :initial-index="0"
+          preview-teleported
+          alt="Zebi Lab v0.2 Validation Sweep Output"
+        />
+        <div class="engineering-log__caption">
+          Fig 2.1 — Telemetry crash plots of standard clustering algorithms under peak thermal stress. Click to enlarge.
+        </div>
+      </div>
+
+      <div class="engineering-log__copy">
+        <div class="engineering-log__label">
+          // Diagnostic Memorandum //
+        </div>
+
+        <p class="engineering-log__paragraph engineering-log__paragraph--bright">
+          The chart on the left captures a critical industry failure. When simulated orbital nodes hit peak workloads, standard bandwidth-heavy algorithms completely collapse under severe power and thermal limits.
+        </p>
+
+        <p class="engineering-log__paragraph">
+          Our HelioMind v0.2 diagnostic sweep revealed why: the optimization engine was calculating data constraints using theoretical software shares, completely ignoring the continuous, absolute wattage drops caused by overheating hardware. This gap resulted in a 0% task rescue rate under peak operational stress.
+        </p>
+
+        <div class="engineering-log__conclusion">
+          <p>
+            Instead of treating this as an unavoidable hardware constraint, we used this failure data to re-engineer our stack. In the upcoming <span class="engineering-version-highlight">HelioMind v0.3</span>, dynamic thermal parameters are integrated directly into the core routing layers—transforming a dangerous physical bottleneck into a resilient software advantage.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2047,3 +2377,882 @@ onUnmounted(() => {
   </main>
   <SiteFooter />
 </template>
+
+<style scoped>
+.product-page :is(
+  .platform-knowledge-head p,
+  .problem-body,
+  .product-position-col-body,
+  .product-findings-body,
+  .product-findings-body p,
+  .product-findings-evidence,
+  .product-validation-stat-label,
+  .product-validation-takeaway,
+  .product-contradiction-resolve,
+  .arch-layer-purpose,
+  .arch-layer-workloads li,
+  .petal-module-desc,
+  .module-description,
+  .module-description p,
+  .compet-bet,
+  .product-showcase-card p,
+  .product-ecosystem-card p,
+  .engineering-log__lead,
+  .engineering-log__paragraph,
+  .engineering-log__conclusion p
+) {
+  font-family: var(--product-body-font);
+  font-size: var(--product-body-size);
+  color: var(--product-body-color);
+  line-height: var(--product-body-line-height);
+}
+
+.product-page :is(
+  .problem-body strong,
+  .product-position-col-body strong,
+  .product-findings-body strong,
+  .product-findings-evidence strong:not(:first-child),
+  .engineering-log__paragraph strong
+) {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.product-validation-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-validation-section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 107, 61, 0.06), transparent 65%);
+  pointer-events: none;
+}
+
+.product-validation-head {
+  margin-bottom: 40px;
+}
+
+.product-validation-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.product-validation-quote {
+  font-family: var(--display);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 400;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+.product-validation-quote em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.product-validation-attribution {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-left: 16px;
+  border-left: 2px solid var(--orange);
+}
+
+.product-validation-readout {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  padding: 28px;
+}
+
+.product-validation-readout-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--orange);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-validation-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-validation-stat-row:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.product-validation-stat-label {
+  max-width: 62%;
+}
+
+.product-validation-stat-value {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+
+.product-validation-stat-value em {
+  font-style: italic;
+  color: var(--orange);
+  font-weight: 300;
+}
+
+.product-validation-takeaway {
+  margin-top: 22px;
+  padding: 16px 18px;
+  background: var(--orange-soft);
+  border-left: 2px solid var(--orange);
+}
+
+.product-validation-takeaway strong {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.product-contradiction {
+  margin-top: 48px;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+}
+
+.product-contradiction-header {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--orange);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.product-contradiction-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.product-contradiction-col {
+  padding: 28px;
+}
+
+.product-contradiction-col:first-child {
+  border-right: 1px solid var(--border);
+}
+
+.product-contradiction-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-contradiction-label.stage {
+  color: var(--text-3);
+}
+
+.product-contradiction-label.filing {
+  color: var(--cyan);
+}
+
+.product-contradiction-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.product-contradiction-text {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.product-contradiction-text em {
+  font-style: italic;
+  color: var(--orange);
+}
+
+.product-contradiction-source {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+  margin-top: 14px;
+}
+
+.product-contradiction-resolve {
+  padding: 20px 28px;
+  border-top: 1px solid var(--border);
+  background: var(--orange-soft);
+}
+
+.product-contradiction-resolve strong {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.product-position-statement {
+  max-width: 900px;
+}
+
+.product-position-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.product-position-col {
+  background: var(--bg);
+  padding: 32px 28px;
+}
+
+.product-position-col-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+
+.product-position-col-title {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin-bottom: 12px;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+.product-findings-section .platform-knowledge-head {
+  margin-bottom: 40px;
+}
+
+.product-findings-body {
+  width: 100%;
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.product-findings-block + .product-findings-block {
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.product-findings-block p {
+  margin: 0 0 20px;
+}
+
+.product-findings-block p:last-child {
+  margin-bottom: 0;
+}
+
+.product-findings-subtitle {
+  font-family: var(--display);
+  font-size: clamp(22px, 2.4vw, 28px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin: 0 0 20px;
+}
+
+.product-findings-list {
+  margin: 8px 0 28px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.product-findings-evidence strong:first-child {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  margin-right: 8px;
+  margin-bottom: 6px;
+  border-radius: 3px;
+  vertical-align: baseline;
+}
+
+.product-findings-evidence--established strong:first-child {
+  color: #9ec5f0;
+  background: rgba(107, 159, 212, 0.14);
+}
+
+.product-findings-evidence--modeled strong:first-child {
+  color: #b4c0e8;
+  background: rgba(139, 159, 212, 0.14);
+}
+
+.product-findings-evidence--measured strong:first-child {
+  color: var(--orange-bright);
+  background: var(--orange-soft);
+}
+
+.product-findings-evidence--next strong:first-child {
+  color: var(--text-3);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+#findings .product-findings-citation {
+  color: var(--orange);
+  font-family: var(--sans);
+  font-size: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 107, 61, 0.55);
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+#findings .product-findings-citation:hover {
+  color: var(--orange-bright);
+  text-decoration-color: var(--orange-bright);
+}
+
+#findings .product-findings-citation:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.product-findings-preprint-list {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 16px;
+}
+
+.product-findings-preprint-item {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-2) 62%, transparent 38%);
+}
+
+#findings .product-findings-citation--block {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.product-findings-paper-icon {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  color: color-mix(in srgb, var(--orange) 80%, #fff 20%);
+}
+
+.product-findings-paper-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.product-findings-preprint-item:hover {
+  border-color: color-mix(in srgb, var(--orange) 35%, var(--border) 65%);
+}
+
+.product-findings-sim-subtitle {
+  font-style: italic;
+  /* color: var(--orange); */
+  font-weight: 400;
+}
+
+.product-findings-sim-figure {
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #05070b;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.product-findings-sim-image {
+  width: 100%;
+  display: block;
+  cursor: zoom-in;
+}
+
+.product-findings-sim-image :deep(.el-image__inner) {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.product-findings-sim-caption {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--text-3);
+  text-align: center;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--border);
+}
+
+.product-findings-sim-name {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .product-findings-block + .product-findings-block {
+    margin-top: 36px;
+    padding-top: 36px;
+  }
+
+  .product-findings-subtitle {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .product-findings-list {
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+
+  .product-findings-preprint-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  #findings .product-findings-citation--block {
+    padding: 11px 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .product-validation-grid,
+  .product-contradiction-cols,
+  .product-position-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .product-contradiction-col:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .product-validation-stat-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .product-validation-stat-label {
+    max-width: none;
+  }
+}
+
+.product-page-toc {
+  position: fixed;
+  top: calc(var(--site-nav-height, 72px) + 28px);
+  left: max(16px, calc((100vw - min(100vw, 1400px)) / 2 - 184px));
+  z-index: 30;
+  width: 168px;
+  max-height: calc(100vh - var(--site-nav-height, 72px) - 56px);
+  overflow-x: clip;
+  overflow-y: auto;
+  padding: 4px 0;
+  overscroll-behavior-x: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-10px);
+  scrollbar-width: thin;
+  transition:
+    opacity 0.22s ease,
+    visibility 0.22s ease,
+    transform 0.22s ease;
+}
+
+.product-page-toc.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.product-page-toc__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.product-page-toc__label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.product-page-toc__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-2);
+  color: var(--text-2);
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.product-page-toc__close:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--orange) 40%, var(--border) 60%);
+  background: var(--surface);
+}
+
+.product-page-toc__close:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.product-page-toc-toggle {
+  position: fixed;
+  top: calc(var(--site-nav-height, 72px) + 28px);
+  left: max(16px, calc((100vw - min(100vw, 1400px)) / 2 - 184px));
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text-2);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-8px);
+  transition:
+    opacity 0.22s ease,
+    visibility 0.22s ease,
+    transform 0.22s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.product-page-toc-toggle.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.product-page-toc-toggle:hover {
+  color: var(--orange);
+  border-color: color-mix(in srgb, var(--orange) 45%, var(--border) 55%);
+}
+
+.product-page-toc-toggle:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.product-page-toc__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.product-page-toc__link {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  padding: 7px 10px;
+  border-left: 2px solid transparent;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--text-2);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.product-page-toc__link:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 60%, transparent 40%);
+}
+
+.product-page-toc__link:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+.product-page-toc__link.is-active {
+  color: var(--orange);
+  border-left-color: var(--orange);
+  background: color-mix(in srgb, var(--orange-soft) 70%, transparent 30%);
+}
+
+.product-page-toc__num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+.product-page-toc__link.is-active .product-page-toc__num {
+  color: var(--orange);
+}
+
+.product-page-toc__text {
+  font-weight: 500;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1023px) {
+  .product-page-toc,
+  .product-page-toc-toggle {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .product-page-toc,
+  .product-page-toc-toggle {
+    left: 16px;
+    width: 148px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-page-toc {
+    transition: none;
+  }
+
+  .product-page-toc__link {
+    transition: none;
+  }
+}
+
+.platform-hero {
+  background-size:
+    cover,
+    cover,
+    auto 100%;
+  background-position:
+    left top,
+    center,
+    right center;
+}
+
+.engineering-log {
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+
+.engineering-log__header {
+  margin-bottom: 48px;
+  padding-right: 0;
+}
+
+.engineering-log__eyebrow {
+  font-family: monospace;
+  color: #ff6b00;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.engineering-log__title {
+  font-size: 32px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 12px;
+  letter-spacing: -0.02em;
+}
+
+.engineering-log__lead {
+  margin-top: 12px;
+  max-width: 750px;
+}
+
+.engineering-version-highlight {
+  color: #ff6b00;
+  font-weight: 600;
+  text-shadow: 0 0 24px rgba(255, 107, 0, 0.35);
+}
+
+.engineering-log__panel {
+  background: rgba(12, 16, 24, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 44px;
+  backdrop-filter: blur(15px);
+  border-radius: 4px;
+}
+
+.engineering-log__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.engineering-log__figure {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  background: #05070b;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.engineering-log__image {
+  width: 100%;
+  display: block;
+  cursor: zoom-in;
+  filter: saturate(0.95) contrast(1.05);
+}
+
+.engineering-log__image :deep(.el-image__inner) {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.engineering-log__caption {
+  font-family: monospace;
+  font-size: 11px;
+  color: #525866;
+  margin-top: 12px;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+.engineering-log__copy {
+  padding-right: 0;
+}
+
+.engineering-log__label {
+  font-family: monospace;
+  font-size: 11px;
+  color: #ff6b00;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 16px;
+}
+
+.engineering-log__paragraph {
+  margin-bottom: 20px;
+}
+
+.engineering-log__paragraph--bright {
+  margin-bottom: 16px;
+}
+
+.engineering-log__conclusion {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 20px;
+}
+
+.engineering-log__conclusion p {
+  font-weight: 500;
+}
+
+@media (max-width: 960px) {
+  .engineering-log__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .platform-hero {
+    background-size:
+      cover,
+      cover,
+      auto 100%;
+    background-position:
+      left top,
+      center,
+      right center;
+  }
+
+  .engineering-log__header {
+    padding-right: 0;
+  }
+
+  .engineering-log__panel {
+    padding: 28px 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+  }
+
+  .engineering-log__copy {
+    padding-right: 0;
+  }
+
+  .engineering-log__figure {
+    padding: 16px;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+</style>

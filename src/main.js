@@ -12,6 +12,7 @@ import productHeroImage from '@/assets/images/product.jpg'
 import planHeroImage from '@/assets/images/plan.jpg'
 import missionHeroImage from '@/assets/images/mission.jpg'
 import joinUsHeroImage from '@/assets/images/joinus.jpg'
+import jasperHeroImage from '@/assets/images/jasper-hero.jpg'
 
 function restoreSpaPathFrom404Redirect() {
   const url = new URL(window.location.href)
@@ -41,6 +42,7 @@ function preloadImage(href, fetchPriority = 'auto') {
   [planHeroImage, 'auto'],
   [missionHeroImage, 'auto'],
   [joinUsHeroImage, 'auto'],
+  [jasperHeroImage, 'auto'],
 ].forEach(([href, priority]) => preloadImage(href, priority))
 
 restoreSpaPathFrom404Redirect()
