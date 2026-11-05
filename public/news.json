@@ -1,37 +1,37 @@
 {
-  "updatedAt": "2026-11-04T19:21:17.904Z",
+  "updatedAt": "2026-11-05T05:06:20.302Z",
   "news": [
     {
-      "title": "What Will Politics Look Like on Other Planets? It's Likely to Be a Mishmash",
-      "description": "When we make our home on other worlds, who will be in charge? Will it be an emperor? A billionaire? A rebel alliance? Or none of the above? Astrobiologist Jacob Haqq Misra runs through the legal and political options.",
-      "url": "https://www.universetoday.com/articles/what-will-politics-look-like-on-other-planets-its-likely-to-be-a-mishmash",
-      "image": "https://www.universetoday.com/article_images/261101-dune_20261103_184620.jpeg",
-      "source": "Universe Today",
-      "publishedAt": "2026-11-03T19:21:05Z"
+      "title": "How Conrad Thompson Used Wrestling Nostalgia To Build a Podcasting Empire",
+      "description": "\"The big challenge with mainstream media is monetizing advertising for wrestling. There is a perception that wrestling fans are low class, uneducated, and low income. That's not reality. I can tell you firsthand because I've done thousands of mortgages for fa…",
+      "url": "https://barrettmedia.com/2026/11/04/conrad-thompson-wrestling-nostalgia-podcasting-empire/",
+      "image": "https://s.yimg.com/lo/mysterio/api/23a074fc6c5551d3943f41c79514c53e331277d69ba3907814fbf6daca9e8c3c/lightyear_networkapi/resizefill_w1024_h576%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fbarrett_media_699%2F5235b88fb54b263fe6d89d6a06543af5.jpg",
+      "source": "Barrettmedia.com",
+      "publishedAt": "2026-11-04T05:05:00Z"
     },
     {
-      "title": "Spaceflight research opens new avenues for studying rare pediatric diseases",
-      "description": "Earth-based hiPSC models have transformed disease research but remain limited by cellular immaturity, a strong reliance on glycolysis rather than oxidative phosphorylation (OXPHOS), and incomplete tissue architecture.",
-      "url": "https://www.news-medical.net/news/20261103/Spaceflight-research-opens-new-avenues-for-studying-rare-pediatric-diseases.aspx",
-      "image": "https://www.news-medical.net/image-handler/picture/2017/6/Anatomical_structure_of_biological_animal_cell_with_organelles-eranicle_1d73b50575dc4546875a4a2fc7d429a6-620x480.jpg",
-      "source": "News-Medical.Net",
-      "publishedAt": "2026-11-03T19:21:00Z"
+      "title": "NASA’s $500-million Swift space telescope set for fiery re-entry after failed rescue mission",
+      "description": "NASA's $500-million Swift space telescope is set for re-entry after a failed rescue mission. The observatory studied gamma-ray bursts for nearly 22 years.",
+      "url": "https://www.thehindubusinessline.com/news/science/nasas-500-million-swift-space-telescope-set-for-fiery-re-entry-after-failed-rescue-mission/article71664008.ece",
+      "image": "https://bl-i.thgim.com/public/incoming/8ubwno/article71664038.ece/alternates/LANDSCAPE_1200/2026-11-04T014050Z_748329732_RC2S5MA0XRAB_RTRMADP_3_SPACE-NASA-SWIFT.JPG",
+      "source": "BusinessLine",
+      "publishedAt": "2026-11-04T05:04:13Z"
     },
     {
-      "title": "Ex-Epic Dev Blames Steam Loyalty For Killing PC Store Competition",
-      "description": "Valve has spent over two decades building its Steam games storefront into the PC gaming juggernaut it is today, with it currently serving as the de facto place to buy games for most PC gamers. Epic Games has sought to knock Valve off the top",
-      "url": "https://hothardware.com/news/ex-epic-dev-steam-pc-store-competition",
-      "image": "https://images.hothardware.com/contentimages/newsitem/72025/content/16x9_2133x1200_highres-ex-epic-dev-steam-rant-news.jpg",
-      "source": "Hot Hardware",
-      "publishedAt": "2026-11-03T19:20:00Z"
+      "title": "These college students launched a legal tech startup during finals week. Now, it's business first, school second.",
+      "description": "Raphael Lim and Jamison Teng have had to sacrifice social life, grades, and Brazilian Jiu-Jitsu training to build up Jam & Raph.",
+      "url": "https://www.businessinsider.com/college-students-singapore-legal-tech-startup-2026-11#article",
+      "image": "https://i.insider.com/6acc5bf87bf24b4467e6a292?width=1029&format=jpeg",
+      "source": "Business Insider",
+      "publishedAt": "2026-11-04T05:01:01Z"
     },
     {
-      "title": "SOLOEVER Compression Knee Brace w/ Side Stabilizers & Adjustable Patella Strap $9",
-      "description": "Soloever Sports via Amazon [amazon.com] has *SOLOEVER Compression Knee Brace w/ Side Stabilizers, Gel Pad & Adjustable Patella Strap (S-XXL)* on sale for $17.99 - 50% off when you apply promo code...",
-      "url": "https://slickdeals.net/f/20227596-soloever-compression-knee-brace-w-side-stabilizers-gel-pad-adjustable-patella-strap-s-xxl-8-99-free-shipping-w-prime-or-on-35",
-      "image": "https://slickdeals.net/attachment/2/0/3/1/1/5/0/450x450/22136895.thumb",
-      "source": "Slickdeals.net",
-      "publishedAt": "2026-11-03T19:19:56Z"
+      "title": "Stephanie Phair Bets on AI-powered Fragrance Discovery With Parfumerie",
+      "description": "The nascent platform aims to connect personalized scent discovery to purchases through multibrand retailers, beginning in the U.K. with Selfridges, Sephora, Space NK and more.",
+      "url": "http://wwd.com/beauty-industry-news/fragrance/stephanie-phair-ai-powered-fragrance-discovery-parfumerie-1239397903/",
+      "image": "https://wwd.com/wp-content/uploads/2026/11/Parfumerie_AllThree_16x9_4K_backdrop.png?crop=0px%2C11px%2C3840px%2C2149px&resize=1000%2C563",
+      "source": "WWD",
+      "publishedAt": "2026-11-04T05:01:00Z"
     }
   ]
 }
